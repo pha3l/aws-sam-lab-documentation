@@ -1,0 +1,637 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Create Poll Function · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="get_function.html" />
+    
+    
+    <link rel="prev" href="dynamo_config.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../setup.html">
+            
+                <a href="../setup.html">
+            
+                    
+                    Development Environment
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../sam_local.html">
+            
+                <a href="../sam_local.html">
+            
+                    
+                    SAM Local
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="intro.html">
+            
+                <a href="intro.html">
+            
+                    
+                    Part I - API
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="project_setup.html">
+            
+                <a href="project_setup.html">
+            
+                    
+                    Project Setup
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="dynamo_config.html">
+            
+                <a href="dynamo_config.html">
+            
+                    
+                    DynamoDB Table Setup
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.3" data-path="create_function.html">
+            
+                <a href="create_function.html">
+            
+                    
+                    Create Poll Function
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="get_function.html">
+            
+                <a href="get_function.html">
+            
+                    
+                    Get Poll Function
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="list_function.html">
+            
+                <a href="list_function.html">
+            
+                    
+                    List Poll Function
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="vote_function.html">
+            
+                <a href="vote_function.html">
+            
+                    
+                    Vote Function
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="deployment.html">
+            
+                <a href="deployment.html">
+            
+                    
+                    Deployment
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../client/intro.html">
+            
+                <a href="../client/intro.html">
+            
+                    
+                    Part II - Client App
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../s3_site_bucket_setup.md">
+            
+                <span>
+            
+                    
+                    Create S3 Static Site Bucket
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../client/setup.md">
+            
+                <span>
+            
+                    
+                    Angular Project Setup
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../client/deployment.md">
+            
+                <span>
+            
+                    
+                    Deployment
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Create Poll Function</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="authoring-the-create-function">Authoring the Create Function</h1>
+<p>With Typescript, we can use an interface to define the structure and expected properties (and thier types) of an object, and use this to our advantage as we write our application.  We&apos;ll use this to ensure we have a consistent data model across all of our functions.  Let&apos;s start by defining an interface, <code>poll.model.ts</code>, at the root of the <code>src</code> folder:</p>
+<p><code>src/poll.model.ts</code></p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> Poll {
+    id: <span class="hljs-built_in">string</span>;
+    title: <span class="hljs-built_in">string</span>;
+    question: <span class="hljs-built_in">string</span>;
+    answers: <span class="hljs-built_in">Array</span>&lt;<span class="hljs-built_in">string</span>&gt;;
+    createdAt: <span class="hljs-built_in">Date</span>;
+    updateAt: <span class="hljs-built_in">Date</span>;
+}
+</code></pre>
+<p>But, we also need a way to track the number of votes for each answer.  In the same file below the <code>Poll</code> interface definition, create another interface, <code>PollAnswer</code> as follows:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> PollAnswer {
+    answer: <span class="hljs-built_in">string</span>;
+    votes: <span class="hljs-built_in">number</span>;
+}
+</code></pre>
+<p>And then change the type of the <code>answers</code> property to <code>Array&lt;PollAnswer&gt;</code>.</p>
+<p>The final file should look like this now:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> Poll {
+    id: <span class="hljs-built_in">string</span>;
+    title: <span class="hljs-built_in">string</span>;
+    question: <span class="hljs-built_in">string</span>;
+    answers: <span class="hljs-built_in">Array</span>&lt;PollAnswer&gt;;
+    createdAt: <span class="hljs-built_in">Date</span>;
+    updateAt: <span class="hljs-built_in">Date</span>;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> PollAnswer {
+    answer: <span class="hljs-built_in">string</span>;
+    votes: <span class="hljs-built_in">number</span>;
+}
+</code></pre>
+<p>Now, we want to avoid duplicating code between our functions so let&apos;s implement a basic repository design pattern that will abstract the <a href="../GLOSSARY.html#dynamodb" class="glossary-term" title="AWS&apos;s highly scalable document-based NoSQL database solution">DynamoDB</a> logic.  With only one table/model, this may seem like overkill, but in a more complex project it&apos;s a great way to DRY up the persistence logic.  Create a file <code>dynamo-repository.ts</code>:</p>
+<p><code>src/dynamo-repository.ts</code></p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { DocumentClient } from <span class="hljs-string">&apos;aws-sdk/lib/dynamodb/document_client&apos;</span>;
+<span class="hljs-keyword">import</span> { DynamoDB } from <span class="hljs-string">&apos;aws-sdk&apos;</span>;
+<span class="hljs-keyword">import</span> { PutItemInput, PutItemOutput } from <span class="hljs-string">&apos;aws-sdk/clients/dynamodb&apos;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> DynamoRepository&lt;T&gt; {
+    <span class="hljs-keyword">private</span> dynamoClient : DocumentClient = <span class="hljs-keyword">new</span> DynamoDB.DocumentClient();
+
+    <span class="hljs-keyword">constructor</span>(private tableName: string) {}
+
+    <span class="hljs-keyword">public</span> create(entity: T) : Promise&lt;PutItemOutput&gt; {
+        <span class="hljs-keyword">let</span> params = {
+            TableName: <span class="hljs-keyword">this</span>.tableName,
+            Item: entity as <span class="hljs-built_in">Object</span>
+        } as PutItemInput;
+
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Promise&lt;PutItemOutput&gt;((resolve, reject) =&gt; {
+            <span class="hljs-keyword">this</span>.dynamoClient.put(params, (err, data) =&gt; {
+                <span class="hljs-keyword">if</span> (err) reject(err);
+                <span class="hljs-keyword">else</span> resolve(data);
+            });
+        });
+    }
+
+}
+</code></pre>
+<p>What we&apos;ve done here is create a generic repository class that will work with any table/entity. Note that we&apos;ve pulled the region for the table out of the environment, so we&apos;ll have to make sure this is set later.</p>
+<p>Along the same lines, let&apos;s create a class to represent the response that <a href="../GLOSSARY.html#api-gateway" class="glossary-term" title="AWS service that facilitates the creation and management of scalable and secure APIs">API Gateway</a> expects when invoking the <a href="../GLOSSARY.html#lambda" class="glossary-term" title="AWS&apos;s Function-as-a-Service platform">lambda</a> on the user&apos;s behalf.  Create a file <code>api-gateway-response.ts</code>:</p>
+<p><code>src/api-gateway-response.ts</code></p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> ApiGatewayResponse {
+    <span class="hljs-keyword">private</span> statusCode: <span class="hljs-built_in">number</span>;
+    <span class="hljs-keyword">private</span> headers: {
+        <span class="hljs-string">&quot;Access-Control-Allow-Origin&quot;</span>: <span class="hljs-string">&quot;*&quot;</span>,
+        <span class="hljs-string">&quot;Access-Control-Allow-Credentials&quot;</span>: <span class="hljs-literal">true</span>
+    }
+    <span class="hljs-keyword">private</span> body: <span class="hljs-built_in">string</span>;
+    <span class="hljs-keyword">private</span> isBase64Encoded: <span class="hljs-built_in">boolean</span>;
+
+    <span class="hljs-keyword">constructor</span>(responseType: ResponseType, body: Object, isBase64Encoded?: boolean) {
+        <span class="hljs-keyword">this</span>.statusCode = responseType;
+        <span class="hljs-keyword">this</span>.body = <span class="hljs-built_in">JSON</span>.stringify(body);
+        <span class="hljs-keyword">this</span>.isBase64Encoded = isBase64Encoded || <span class="hljs-literal">false</span>;
+    }   
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">enum</span> ResponseType {
+    OK = <span class="hljs-number">200</span>,
+    SERVER_ERROR = <span class="hljs-number">500</span>,
+}
+</code></pre>
+<p>Unlike relational database systems that you may be more familiar with, <a href="../GLOSSARY.html#dynamodb" class="glossary-term" title="AWS&apos;s highly scalable document-based NoSQL database solution">DynamoDB</a> and other object-based NoSQL databases don&apos;t have a utility for generating unique identifiers built in, so let&apos;s add an NPM package to help us generate them in our function:</p>
+<pre><code>$ npm install --save uuid
+</code></pre><p>We installed the <code>uuid</code> package with the <code>--save</code> flag, which means that it will not only be installed to <code>node_modules</code>, but will be added to our <code>package.json</code>.</p>
+<p>While we&apos;re on the subject of npm dependencies, you might have noticed that the <code>aws-sdk</code> is specified as a dev dependency.  This is because <a href="../GLOSSARY.html#lambda" class="glossary-term" title="AWS&apos;s Function-as-a-Service platform">lambda</a> provides this in the execution environment, so we don&apos;t need to bundle it, which is great because it&apos;s a large package.</p>
+<p>Now we have all the pieces in place, and we can implement the actual function.  Create the file <code>create-poll.function.ts</code>:</p>
+<p><code>src/create-poll.function.ts</code></p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { Handler, APIGatewayEvent, Context, Callback } from <span class="hljs-string">&apos;aws-lambda&apos;</span>;
+<span class="hljs-keyword">import</span> { v4 as uuid } from <span class="hljs-string">&apos;uuid&apos;</span>;
+<span class="hljs-keyword">import</span> { Poll } from <span class="hljs-string">&apos;./poll.model&apos;</span>;
+<span class="hljs-keyword">import</span> { DynamoRepository } from <span class="hljs-string">&apos;./dynamo-repository&apos;</span>;
+<span class="hljs-keyword">import</span> { ApiGatewayResponse, ResponseType } from <span class="hljs-string">&apos;./api-gateway-response&apos;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> handler: Handler = (event: APIGatewayEvent, context: Context, callback?: Callback) =&gt; {
+    <span class="hljs-keyword">let</span> poll = <span class="hljs-built_in">JSON</span>.parse(event.body) as Poll;
+    <span class="hljs-keyword">let</span> now = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime();
+
+    poll.createdAt = now;
+    poll.updatedAt = now;
+    poll.id = uuid();
+
+    <span class="hljs-keyword">new</span> DynamoRepository&lt;Poll&gt;(process.env.TABLE_NAME).create(poll).then((val) =&gt; {
+        callback(<span class="hljs-literal">null</span>, <span class="hljs-keyword">new</span> ApiGatewayResponse(ResponseType.OK, poll));
+    }).catch((err) =&gt; {
+        callback(<span class="hljs-literal">null</span>, <span class="hljs-keyword">new</span> ApiGatewayResponse(ResponseType.SERVER_ERROR, { status: <span class="hljs-literal">false</span>, error: err }));
+    });
+}
+</code></pre>
+<p>The last step is to describe our function within the <a href="../GLOSSARY.html#cloudformation" class="glossary-term" title="AWS&apos;s infrastructure-as-code service">CloudFormation</a> template.  Remove the section for the HelloWorldSample function and add the following under the Dynamo table in <code>template.yml</code>:</p>
+<p><code>template.yml</code></p>
+<pre><code class="lang-yaml">...
+<span class="hljs-attr">CreatePoll:</span>
+<span class="hljs-attr">    Type:</span> AWS::Serverless::Function
+<span class="hljs-attr">    Properties:</span>
+<span class="hljs-attr">        CodeUri:</span> ../dist/create-poll/create-poll.zip
+<span class="hljs-attr">        Handler:</span> index.handler
+<span class="hljs-attr">        Runtime:</span> nodejs6<span class="hljs-number">.10</span>
+<span class="hljs-attr">        Policies:</span> AmazonDynamoDBFullAccess
+<span class="hljs-attr">        Events:</span>
+<span class="hljs-attr">            CreatePoll:</span>
+<span class="hljs-attr">                Type:</span> Api
+<span class="hljs-attr">                Properties:</span>
+<span class="hljs-attr">                Path:</span> /polls
+<span class="hljs-attr">                Method:</span> POST
+<span class="hljs-attr">        Environment:</span>
+<span class="hljs-attr">            Variables:</span>
+<span class="hljs-attr">                TABLE_NAME:</span> !Ref Polls
+</code></pre>
+<p>Here you can see we&apos;ve added a new function with a <strong>Logical ID</strong> of <code>CreatePoll</code>, and pointed it at the transpiled, packaged and minified webpack output for the function script.  We&apos;ve also given the function a managed policy that gives it full access to <a href="../GLOSSARY.html#dynamodb" class="glossary-term" title="AWS&apos;s highly scalable document-based NoSQL database solution">DynamoDB</a> resources.  While this isn&apos;t the best idea for production use and you&apos;d want to define a role with more limited scope (which you can do right in the <a href="../GLOSSARY.html#cloudformation" class="glossary-term" title="AWS&apos;s infrastructure-as-code service">CloudFormation</a> template and reference directly!), it will be fine for our purpose. We&apos;ve also defined the event triggers for the function, in this case an <a href="../GLOSSARY.html#api-gateway" class="glossary-term" title="AWS service that facilitates the creation and management of scalable and secure APIs">API Gateway</a> route of <code>/polls</code> with a <code>POST</code> HTTP method.  Finally, we&apos;ve given the function access to an environment variable called <code>TABLE_NAME</code>, which we already used in the function code to get the table name. We&apos;ve then used the !Ref intrinsic function to obtain the table name from the resource defined above.</p>
+<p>===</p>
+<p>With our first function authored, howabout a quick test to see how we&apos;re doing so far? Let&apos;s generate a mock payload using <code>sam-local</code>:</p>
+<pre><code class="lang-bash">$ sam <span class="hljs-built_in">local</span> generate-event api -m POST -b <span class="hljs-string">&quot;{\\\&quot;title\\\&quot;:\\\&quot;Test Poll\\\&quot;, \\\&quot;question\\\&quot;: \\\&quot;Which bear is best?\\\&quot;, \\\&quot;answers\\\&quot;: [{\\\&quot;answer\\\&quot;:\\\&quot;Black Bear\\\&quot;, \\\&quot;votes\\\&quot;:0},{\\\&quot;answer\\\&quot;:\\\&quot;That&apos;s debatable...\\\&quot;, \\\&quot;votes\\\&quot;:0}]}&quot;</span> &gt; mocks/create-poll.json
+</code></pre>
+<p>Now, we&apos;ll need a real <a href="../GLOSSARY.html#dynamodb" class="glossary-term" title="AWS&apos;s highly scalable document-based NoSQL database solution">dynamodb</a> table to use for testing, so although in the end we&apos;d like to provision it with the <a href="../GLOSSARY.html#sam" class="glossary-term" title="Serverless Application Model
+see https://github.com/awslabs/serverless-application-model">SAM</a> <a href="../GLOSSARY.html#cloudformation" class="glossary-term" title="AWS&apos;s infrastructure-as-code service">CloudFormation</a> template, let&apos;s create a table to use for our testing. We&apos;ll do so using the CLI:</p>
+<pre><code class="lang-bash">$ aws dynamodb create-table --region us-west-2 \
+                            --table-name poll-testdb \
+                            --attribute-definitions AttributeName=id,AttributeType=S \
+                            --key-schema AttributeName=id,KeyType=HASH \
+                            --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
+</code></pre>
+<p>Run <code>webpack</code> to generate the function package:</p>
+<pre><code class="lang-bash">$ webpack
+</code></pre>
+<p>Now let&apos;s invoke the function using <code>sam-local</code>, sending our mock event as the payload:</p>
+<pre><code class="lang-bash">$ AWS_REGION=<span class="hljs-string">&quot;us-west-2&quot;</span> TABLE_NAME=<span class="hljs-string">&quot;poll-testdb&quot;</span> sam <span class="hljs-built_in">local</span> invoke CreatePoll <span class="hljs-_">-e</span> mocks/create-poll.json
+</code></pre>
+<p>Note that we passed the environment variables needed by the function directly to <code>sam-local</code>.  Even if they are defined in the <a href="../GLOSSARY.html#cloudformation" class="glossary-term" title="AWS&apos;s infrastructure-as-code service">CloudFormation</a> template, <code>sam-local</code> will not pick them up so this is necessary.</p>
+<p>If everything went okay, you should see <code>{&quot;statusCode&quot;:200,&quot;body&quot;:{}}</code> at the bottom of the output.  You can then head to the console to check out the table contents:
+<img src="../images/api/create_function/dynamo-put-success.png">
+Alternatively, you can use the CLI to check:</p>
+<pre><code class="lang-bash">$ aws --region us-west-2 dynamodb scan --table-name poll-testdb
+{
+    <span class="hljs-string">&quot;Items&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;createdAt&quot;</span>: {
+                <span class="hljs-string">&quot;N&quot;</span>: <span class="hljs-string">&quot;1518585027076&quot;</span>
+            },
+            <span class="hljs-string">&quot;question&quot;</span>: {
+                <span class="hljs-string">&quot;S&quot;</span>: <span class="hljs-string">&quot;Which bear is best?&quot;</span>
+            },
+            <span class="hljs-string">&quot;answers&quot;</span>: {
+                <span class="hljs-string">&quot;L&quot;</span>: [
+                    {
+                        <span class="hljs-string">&quot;M&quot;</span>: {
+                            <span class="hljs-string">&quot;answer&quot;</span>: {
+                                <span class="hljs-string">&quot;S&quot;</span>: <span class="hljs-string">&quot;Black Bear&quot;</span>
+                            },
+                            <span class="hljs-string">&quot;votes&quot;</span>: {
+                                <span class="hljs-string">&quot;N&quot;</span>: <span class="hljs-string">&quot;0&quot;</span>
+                            }
+                        }
+                    },
+                    {
+                        <span class="hljs-string">&quot;M&quot;</span>: {
+                            <span class="hljs-string">&quot;answer&quot;</span>: {
+                                <span class="hljs-string">&quot;S&quot;</span>: <span class="hljs-string">&quot;That&apos;s debatable...&quot;</span>
+                            },
+                            <span class="hljs-string">&quot;votes&quot;</span>: {
+                                <span class="hljs-string">&quot;N&quot;</span>: <span class="hljs-string">&quot;0&quot;</span>
+                            }
+                        }
+                    }
+                ]
+            },
+            <span class="hljs-string">&quot;id&quot;</span>: {
+                <span class="hljs-string">&quot;S&quot;</span>: <span class="hljs-string">&quot;c2a7ca91-a598-4941-8f2e-5dda85482cb9&quot;</span>
+            },
+            <span class="hljs-string">&quot;updatedAt&quot;</span>: {
+                <span class="hljs-string">&quot;N&quot;</span>: <span class="hljs-string">&quot;1518585027076&quot;</span>
+            },
+            <span class="hljs-string">&quot;title&quot;</span>: {
+                <span class="hljs-string">&quot;S&quot;</span>: <span class="hljs-string">&quot;Test Poll&quot;</span>
+            }
+        }
+    ],
+    <span class="hljs-string">&quot;Count&quot;</span>: 1,
+    <span class="hljs-string">&quot;ScannedCount&quot;</span>: 1,
+    <span class="hljs-string">&quot;ConsumedCapacity&quot;</span>: null
+}
+</code></pre>
+<p>As you can see, we successfully created a record in the table! Hold on to the id of the returned record, we&apos;ll use it for further tests.  Let&apos;s continue fleshing out the API functionality. In the next section, we&apos;ll create a function to retrieve a single poll record by it&apos;s id.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="dynamo_config.html" class="navigation navigation-prev " aria-label="Previous page: DynamoDB Table Setup">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="get_function.html" class="navigation navigation-next " aria-label="Next page: Get Poll Function">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Create Poll Function","level":"1.3.3","depth":2,"next":{"title":"Get Poll Function","level":"1.3.4","depth":2,"path":"api/get_function.md","ref":"api/get_function.md","articles":[]},"previous":{"title":"DynamoDB Table Setup","level":"1.3.2","depth":2,"path":"api/dynamo_config.md","ref":"api/dynamo_config.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"api/create_function.md","mtime":"2018-02-15T06:57:31.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-02-16T03:53:12.618Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

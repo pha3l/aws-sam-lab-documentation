@@ -1,0 +1,578 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Vote Function · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="deployment.html" />
+    
+    
+    <link rel="prev" href="list_function.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../setup.html">
+            
+                <a href="../setup.html">
+            
+                    
+                    Development Environment
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../sam_local.html">
+            
+                <a href="../sam_local.html">
+            
+                    
+                    SAM Local
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="intro.html">
+            
+                <a href="intro.html">
+            
+                    
+                    Part I - API
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="project_setup.html">
+            
+                <a href="project_setup.html">
+            
+                    
+                    Project Setup
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="dynamo_config.html">
+            
+                <a href="dynamo_config.html">
+            
+                    
+                    DynamoDB Table Setup
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="create_function.html">
+            
+                <a href="create_function.html">
+            
+                    
+                    Create Poll Function
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="get_function.html">
+            
+                <a href="get_function.html">
+            
+                    
+                    Get Poll Function
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="list_function.html">
+            
+                <a href="list_function.html">
+            
+                    
+                    List Poll Function
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.6" data-path="vote_function.html">
+            
+                <a href="vote_function.html">
+            
+                    
+                    Vote Function
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="deployment.html">
+            
+                <a href="deployment.html">
+            
+                    
+                    Deployment
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../client/intro.html">
+            
+                <a href="../client/intro.html">
+            
+                    
+                    Part II - Client App
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../s3_site_bucket_setup.md">
+            
+                <span>
+            
+                    
+                    Create S3 Static Site Bucket
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../client/setup.md">
+            
+                <span>
+            
+                    
+                    Angular Project Setup
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../client/deployment.md">
+            
+                <span>
+            
+                    
+                    Deployment
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Vote Function</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="authoring-the-vote-function">Authoring the Vote Function</h1>
+<p>We now have a way to create new polls, retrieve the data for a specific poll, and list all of the created polls.  For the sake of brevity, we&apos;ll forgo the other usual CRUD operations and move on to vote-casting.</p>
+<p>As we&apos;ve been doing, let&apos;s add another method to our <code>DynamoRepository</code> abstraction.  Remember that this is a <em>generic</em> implementation that is designed to be useful for any type that we&apos;d like to persist to <a href="../GLOSSARY.html#dynamodb" class="glossary-term" title="AWS&apos;s highly scalable document-based NoSQL database solution">DynamoDB</a>.  With this in mind, create an <code>update</code> method in the class:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">public</span> update(id: <span class="hljs-built_in">string</span>, updateExpression: UpdateExpression, expressionAttributeValues: DynamoDB.DocumentClient.ExpressionAttributeValueMap): Promise&lt;UpdateItemOutput&gt; {
+    <span class="hljs-keyword">let</span> params = {
+        TableName: <span class="hljs-keyword">this</span>.tableName,
+        Key: {
+            id: id
+        },
+        UpdateExpression: updateExpression,
+        ExpressionAttributeValues: expressionAttributeValues,
+        ReturnValues: <span class="hljs-string">&quot;ALL_NEW&quot;</span>
+    } as UpdateItemInput;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Promise&lt;UpdateItemOutput&gt;((resolve, reject) =&gt; {
+        <span class="hljs-keyword">this</span>.dynamoClient.update(params, (err, data) =&gt; {
+            <span class="hljs-keyword">if</span> (err) reject(err);
+            <span class="hljs-keyword">else</span> resolve(data);
+        });
+    });
+}
+</code></pre>
+<p>Create the <code>src/vote.function.ts</code> file:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { Handler, APIGatewayEvent, Context, Callback } from <span class="hljs-string">&apos;aws-lambda&apos;</span>;
+<span class="hljs-keyword">import</span> { Poll } from <span class="hljs-string">&apos;./poll.model&apos;</span>;
+<span class="hljs-keyword">import</span> { DynamoRepository } from <span class="hljs-string">&apos;./dynamo-repository&apos;</span>;
+<span class="hljs-keyword">import</span> { ApiGatewayResponse, ResponseType } from <span class="hljs-string">&apos;./api-gateway-response&apos;</span>;
+<span class="hljs-keyword">import</span> { DocumentClient } from <span class="hljs-string">&apos;aws-sdk/lib/dynamodb/document_client&apos;</span>;
+<span class="hljs-keyword">import</span> { DynamoDB } from <span class="hljs-string">&apos;aws-sdk&apos;</span>;
+<span class="hljs-keyword">import</span> { UpdateItemInput } from <span class="hljs-string">&apos;aws-sdk/clients/dynamodb&apos;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> handler: Handler = (event: APIGatewayEvent, context: Context, callback?: Callback) =&gt; {
+    <span class="hljs-keyword">const</span> pollId = event.pathParameters.pollId;
+    <span class="hljs-keyword">const</span> answerIndex = event.pathParameters.answerIndex;
+
+    <span class="hljs-keyword">const</span> dynamoClient: DocumentClient = <span class="hljs-keyword">new</span> DynamoDB.DocumentClient;
+
+    <span class="hljs-keyword">let</span> params = {
+        TableName: process.env.TABLE_NAME,
+        Key: {
+            id: pollId
+        },
+        UpdateExpression: <span class="hljs-string">&quot;SET answers[&quot;</span> + answerIndex + <span class="hljs-string">&quot;].votes = answers[&quot;</span> + answerIndex + <span class="hljs-string">&quot;].votes + :one&quot;</span>,
+        ExpressionAttributeValues: {
+           <span class="hljs-string">&apos;:one&apos;</span> : <span class="hljs-number">1</span>
+        },
+        ReturnValues: <span class="hljs-string">&quot;ALL_NEW&quot;</span>
+    } as UpdateItemInput;
+
+    dynamoClient.update(params).promise().then(data =&gt; {
+        callback(<span class="hljs-literal">null</span>, <span class="hljs-keyword">new</span> ApiGatewayResponse(ResponseType.OK, data));
+    }, error =&gt; {
+        callback(<span class="hljs-literal">null</span>, <span class="hljs-keyword">new</span> ApiGatewayResponse(ResponseType.SERVER_ERROR, error));
+    });
+}
+</code></pre>
+<p>Now, this is a little more involved than the rest of our functions so far, so let&apos;s go through it quickly.  First, we&apos;re getting two parameters from the route path, the poll the question being voted for belongs to (<code>pollId</code>) and the index of the question in the <code>answers</code> list of that poll (<code>answerIndex</code>).  We&apos;re then constructing the <code>UpdateItemInput</code> object for the <code>DocumentClient#update</code> method, first defining the usual information (table name, primary key of object we want to update).  Then, we define an <code>UpdateExpression</code> parameter, which is the Dynamo equivalent of a <code>SET</code> clause in a SQL <code>UPDATE</code> statement.  In the expression, we&apos;re setting the <code>votes</code> attribute of the answer at the passed in index to it&apos;s current value plus the value of an <code>ExpressionAttribute</code> called <code>:one</code>.  Finally, we give the value for <code>:one</code> as <code>1</code>, and tell Dynamo we&apos;d like to get back the entire updated object after the atomic operation.  What we&apos;ve accomplished with this is updating the counter in place.  Hopefully this simple example is a decent illustration of the  power of the <a href="../GLOSSARY.html#dynamodb" class="glossary-term" title="AWS&apos;s highly scalable document-based NoSQL database solution">DynamoDB</a> <code>update</code> action. There are further parameters available that allow the attribute(s) to be modified to be set programmatically as well!</p>
+<p>Let&apos;s add the function to our <code>template.yml</code>:</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">CastVote:</span>
+<span class="hljs-attr">    Type:</span> AWS::Serverless::Function
+<span class="hljs-attr">    Properties:</span>
+<span class="hljs-attr">        CodeUri:</span> ./dist/vote/vote.zip
+<span class="hljs-attr">        Handler:</span> index.handler
+<span class="hljs-attr">        Runtime:</span> nodejs6<span class="hljs-number">.10</span>
+<span class="hljs-attr">        Policies:</span> AmazonDynamoDBFullAccess
+<span class="hljs-attr">        Events:</span>
+<span class="hljs-attr">            CreatePoll:</span>
+<span class="hljs-attr">                Type:</span> Api
+<span class="hljs-attr">                Properties:</span>
+<span class="hljs-attr">                    Path:</span> /polls/{pollId}/answer/{answerIndex}
+<span class="hljs-attr">                    Method:</span> PATCH
+<span class="hljs-attr">            Environment:</span>
+<span class="hljs-attr">                Variables:</span>
+<span class="hljs-attr">                    TABLE_NAME:</span> !Ref Polls
+</code></pre>
+<p>Note that we&apos;re using a PATCH request for this operation, which is the standard for partial updates on a resource.  Also note that we&apos;ve set the path to have both of the path parameters we used in the function.</p>
+<p>All that&apos;s left to do is a quick test.  Generate the mock payload (make sure you replace the <code>&lt;pollId&gt;</code> with your id):</p>
+<pre><code class="lang-bash">$ sam <span class="hljs-built_in">local</span> generate-event api --method patch --resource /polls/{pollId}/answer/{answerIndex} \
+  --path /polls/&lt;pollId&gt;/answers/0 &gt; mocks/vote.json
+</code></pre>
+<p>Edit it once again to fix the path parameters:</p>
+<pre><code class="lang-json"><span class="hljs-string">&quot;pathParameters&quot;</span>: {
+    <span class="hljs-string">&quot;proxy&quot;</span>: <span class="hljs-string">&quot;/polls/c2a7ca91-a598-4941-8f2e-5dda85482cb9/answers/0&quot;</span>
+}
+</code></pre>
+<p>Should become:</p>
+<pre><code class="lang-json"><span class="hljs-string">&quot;pathParameters&quot;</span>: {
+    <span class="hljs-string">&quot;pollId&quot;</span>: <span class="hljs-string">&quot;c2a7ca91-a598-4941-8f2e-5dda85482cb9&quot;</span>,
+    <span class="hljs-string">&quot;answerIndex&quot;</span>: <span class="hljs-string">&quot;0&quot;</span>
+}
+</code></pre>
+<p><code>webpack</code>, then invoke the function:</p>
+<pre><code class="lang-bash">$ AWS_REGION=<span class="hljs-string">&quot;us-west-2&quot;</span> TABLE_NAME=<span class="hljs-string">&quot;poll-testdb&quot;</span> sam <span class="hljs-built_in">local</span> invoke CastVote <span class="hljs-_">-e</span> mocks/vote.json
+</code></pre>
+<p>Now let&apos;s check the record:</p>
+<pre><code class="lang-bash">$ aws --region us-west-2 dynamodb scan --table-name poll-testdb 
+{
+    <span class="hljs-string">&quot;Items&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;createdAt&quot;</span>: {
+                <span class="hljs-string">&quot;N&quot;</span>: <span class="hljs-string">&quot;1518585027076&quot;</span>
+            },
+            <span class="hljs-string">&quot;question&quot;</span>: {
+                <span class="hljs-string">&quot;S&quot;</span>: <span class="hljs-string">&quot;Which bear is best?&quot;</span>
+            },
+            <span class="hljs-string">&quot;answers&quot;</span>: {
+                <span class="hljs-string">&quot;L&quot;</span>: [
+                    {
+                        <span class="hljs-string">&quot;M&quot;</span>: {
+                            <span class="hljs-string">&quot;answer&quot;</span>: {
+                                <span class="hljs-string">&quot;S&quot;</span>: <span class="hljs-string">&quot;Black Bear&quot;</span>
+                            },
+                            <span class="hljs-string">&quot;votes&quot;</span>: {
+                                <span class="hljs-string">&quot;N&quot;</span>: <span class="hljs-string">&quot;1&quot;</span>
+                            }
+                        }
+                    },
+                    {
+                        <span class="hljs-string">&quot;M&quot;</span>: {
+                            <span class="hljs-string">&quot;answer&quot;</span>: {
+                                <span class="hljs-string">&quot;S&quot;</span>: <span class="hljs-string">&quot;That&apos;s debatable...&quot;</span>
+                            },
+                            <span class="hljs-string">&quot;votes&quot;</span>: {
+                                <span class="hljs-string">&quot;N&quot;</span>: <span class="hljs-string">&quot;0&quot;</span>
+                            }
+                        }
+                    }
+                ]
+            },
+            <span class="hljs-string">&quot;id&quot;</span>: {
+                <span class="hljs-string">&quot;S&quot;</span>: <span class="hljs-string">&quot;c2a7ca91-a598-4941-8f2e-5dda85482cb9&quot;</span>
+            },
+            <span class="hljs-string">&quot;updatedAt&quot;</span>: {
+                <span class="hljs-string">&quot;N&quot;</span>: <span class="hljs-string">&quot;1518585027076&quot;</span>
+            },
+            <span class="hljs-string">&quot;title&quot;</span>: {
+                <span class="hljs-string">&quot;S&quot;</span>: <span class="hljs-string">&quot;Test Poll&quot;</span>
+            }
+        }
+    ],
+    <span class="hljs-string">&quot;Count&quot;</span>: 1,
+    <span class="hljs-string">&quot;ScannedCount&quot;</span>: 1,
+    <span class="hljs-string">&quot;ConsumedCapacity&quot;</span>: null
+}
+</code></pre>
+<p>The vote count for the first answer, Black Bear, is now 1! Hooray!</p>
+<p>We&apos;re done authoring the backend of our application.  Let&apos;s wrap up a couple loose ends in the <a href="../GLOSSARY.html#cloudformation" class="glossary-term" title="AWS&apos;s infrastructure-as-code service">CloudFormation</a> template and get it deployed in the last part of this section.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="list_function.html" class="navigation navigation-prev " aria-label="Previous page: List Poll Function">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="deployment.html" class="navigation navigation-next " aria-label="Next page: Deployment">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Vote Function","level":"1.3.6","depth":2,"next":{"title":"Deployment","level":"1.3.7","depth":2,"path":"api/deployment.md","ref":"api/deployment.md","articles":[]},"previous":{"title":"List Poll Function","level":"1.3.5","depth":2,"path":"api/list_function.md","ref":"api/list_function.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"api/vote_function.md","mtime":"2018-02-16T03:31:32.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-02-16T03:53:12.618Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
