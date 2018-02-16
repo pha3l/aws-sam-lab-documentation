@@ -1,0 +1,4 @@
+{
+    "root": "./book",
+    "plugins": ["prism", "-highlight", "fancybox"]
+}
