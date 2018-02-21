@@ -11,7 +11,6 @@
     * [Vote Function](api/vote_function.md)
     * [Deployment](api/deployment.md)
 * [Part II - Client App](client/intro.md)
-    * [Angular Project Setup](client/setup.md)
     * [Poll Service](client/poll_service.md)
     * [Polls Component](client/polls_component.md)
     * [Poll Component](client/poll_component.md)
