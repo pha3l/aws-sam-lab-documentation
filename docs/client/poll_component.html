@@ -1,0 +1,629 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Poll Component · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fancybox/jquery.fancybox.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fancybox/jquery.fancybox-buttons.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="new_poll_form_component.html" />
+    
+    
+    <link rel="prev" href="polls_component.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../setup.html">
+            
+                <a href="../setup.html">
+            
+                    
+                    Development Environment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../api/intro.html">
+            
+                <a href="../api/intro.html">
+            
+                    
+                    Part I - API
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../api/project_setup.html">
+            
+                <a href="../api/project_setup.html">
+            
+                    
+                    Project Setup
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../api/dynamo_config.html">
+            
+                <a href="../api/dynamo_config.html">
+            
+                    
+                    DynamoDB Table Setup
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../api/create_function.html">
+            
+                <a href="../api/create_function.html">
+            
+                    
+                    Create Poll Function
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../api/get_function.html">
+            
+                <a href="../api/get_function.html">
+            
+                    
+                    Get Poll Function
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../api/list_function.html">
+            
+                <a href="../api/list_function.html">
+            
+                    
+                    List Poll Function
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../api/vote_function.html">
+            
+                <a href="../api/vote_function.html">
+            
+                    
+                    Vote Function
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../api/deployment.html">
+            
+                <a href="../api/deployment.html">
+            
+                    
+                    Deployment
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="intro.html">
+            
+                <a href="intro.html">
+            
+                    
+                    Part II - Client App
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="setup.md">
+            
+                <span>
+            
+                    
+                    Angular Project Setup
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="poll_service.html">
+            
+                <a href="poll_service.html">
+            
+                    
+                    Poll Service
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="polls_component.html">
+            
+                <a href="polls_component.html">
+            
+                    
+                    Polls Component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.4" data-path="poll_component.html">
+            
+                <a href="poll_component.html">
+            
+                    
+                    Poll Component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="new_poll_form_component.html">
+            
+                <a href="new_poll_form_component.html">
+            
+                    
+                    New Poll Form Component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="deployment.html">
+            
+                <a href="deployment.html">
+            
+                    
+                    Deployment
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Poll Component</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="the-poll-component">The Poll Component</h1>
+<p><em>Note: I will not be directing you to add module imports going forward, so make sure that everything is imported as necessary! If your editor is configured correctly it should help you out with this.</em></p>
+<p>Begin once again by using the CLI to generate a skeleton component:</p>
+<pre class="language-"><code class="lang-bash">$ ng g component Poll
+</code></pre>
+<p>For this component, we&apos;re going to want to use a chart to visualize the current poll results.  We&apos;ll use an npm library called <em>ngx-charts</em> to do this, so let&apos;s install it:</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">npm</span> <span class="token function">install</span> --save @swimlane/ngx-charts
+</code></pre>
+<p>Let&apos;s also add the module to our app module imports:</p>
+<pre class="language-"><code class="lang-typescript"><span class="token keyword">import</span> <span class="token punctuation">{</span> NgxChartsModule <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@swimlane/ngx-charts&apos;</span><span class="token punctuation">;</span>
+
+<span class="token operator">...</span>
+
+imports<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    BrowserModule<span class="token punctuation">,</span>
+    BrowserAnimationsModule<span class="token punctuation">,</span>
+    MatToolbarModule<span class="token punctuation">,</span>
+    MatDividerModule<span class="token punctuation">,</span>
+    MatCardModule<span class="token punctuation">,</span>
+    MatListModule<span class="token punctuation">,</span>
+    MatButtonModule<span class="token punctuation">,</span>
+    MatInputModule<span class="token punctuation">,</span>
+    HttpClientModule<span class="token punctuation">,</span>
+    NgxChartsModule <span class="token comment" spellcheck="true">// &lt;--</span>
+<span class="token punctuation">]</span><span class="token punctuation">,</span>
+
+<span class="token operator">...</span>
+</code></pre>
+<p>For this component, we want to implement the <code>OnChanges</code> interface rather than the <code>OnInit</code> default.  Replace the import for <code>OnInit</code> with one for <code>OnChanges</code>, change the <code>implements</code> to <code>OnChanges</code>, and replace the <code>ngOnInit</code> method with <code>ngOnChanges</code>:</p>
+<pre class="language-"><code class="lang-typescript"><span class="token keyword">import</span> <span class="token punctuation">{</span> Component<span class="token punctuation">,</span> OnChanges <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@angular/core&apos;</span><span class="token punctuation">;</span>
+
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  selector<span class="token punctuation">:</span> <span class="token string">&apos;app-poll&apos;</span><span class="token punctuation">,</span>
+  templateUrl<span class="token punctuation">:</span> <span class="token string">&apos;./poll.component.html&apos;</span><span class="token punctuation">,</span>
+  styleUrls<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&apos;./poll.component.scss&apos;</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">PollComponent</span> <span class="token keyword">implements</span> <span class="token class-name">OnChanges</span> <span class="token punctuation">{</span>
+
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+  <span class="token function">ngOnChanges</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<p>We want to pass in a Poll instance, so declare a property decorated with <code>@Input()</code> to hold it at the top of the class:</p>
+<pre class="language-"><code class="lang-typescript">@<span class="token function">Input</span><span class="token punctuation">(</span><span class="token punctuation">)</span> poll<span class="token punctuation">:</span> Poll<span class="token punctuation">;</span>
+</code></pre>
+<p>We also want to notify the parent component when there are changes it should know about.  Add an <code>@Output()</code> property as follows:</p>
+<pre class="language-"><code class="lang-typescript">@<span class="token function">Output</span><span class="token punctuation">(</span><span class="token punctuation">)</span> pollChange <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">EventEmitter</span><span class="token operator">&lt;</span>Poll<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>We need an array to hold the poll data transformed into the format expected by the charting library:</p>
+<pre class="language-"><code class="lang-typescript">results<span class="token punctuation">:</span> <span class="token keyword">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre>
+<p>We also need some constants that we&apos;ll use in the template to build the interface (feel free to tweak the colors!):</p>
+<pre class="language-"><code class="lang-typescript">readonly colorPalette <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token string">&apos;#27a3dd&apos;</span><span class="token punctuation">,</span>
+    <span class="token string">&apos;#9dd5c0&apos;</span><span class="token punctuation">,</span>
+    <span class="token string">&apos;#f49bc4&apos;</span><span class="token punctuation">,</span>
+    <span class="token string">&apos;#f1646c&apos;</span><span class="token punctuation">,</span>
+    <span class="token string">&apos;#ffc266&apos;</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+readonly colorScheme <span class="token operator">=</span> <span class="token punctuation">{</span> domain<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>colorPalette <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+readonly alphabet <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token string">&apos;A&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;B&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;C&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;D&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;E&apos;</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Inject the PollService in the constructor:</p>
+<pre class="language-"><code class="lang-typescript"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token keyword">private</span> pollService<span class="token punctuation">:</span> PollService<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+</code></pre>
+<p>Add a method to create the chart data from the poll object:</p>
+<pre class="language-"><code class="lang-typescript"><span class="token keyword">private</span> <span class="token function">generateChartData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>results <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>poll<span class="token punctuation">.</span>answers<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span>answer<span class="token punctuation">,</span> index<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>alphabet<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">,</span> value<span class="token punctuation">:</span> answer<span class="token punctuation">.</span>votes <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>And call this method from <code>ngOnChanges</code>:</p>
+<pre class="language-"><code class="lang-typescript"><span class="token function">ngOnChanges</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">generateChartData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Finally, we need a method to handle voting:</p>
+<pre class="language-"><code class="lang-typescript"><span class="token function">vote</span><span class="token punctuation">(</span>index<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>pollService<span class="token punctuation">.</span><span class="token function">castVote</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>poll<span class="token punctuation">,</span> index<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>updatedPoll <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>pollChange<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span>updatedPoll<span class="token punctuation">.</span>Attributes as Poll<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>The method emits an event on our output property with the new poll object as it&apos;s payload.</p>
+<p>Now let&apos;s create the template:
+<code>poll.component.html</code></p>
+<pre class="language-"><code class="lang-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mat-card</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mat-card-title</span><span class="token punctuation">&gt;</span></span>{{ poll.title }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mat-card-title</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mat-card-subtitle</span><span class="token punctuation">&gt;</span></span>{{ poll.question }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mat-card-subtitle</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mat-card-content</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mat-divider</span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">margin-bottom</span><span class="token punctuation">:</span>1em<span class="token punctuation">;</span></span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mat-divider</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mat-list</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>answer-list<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mat-list-item</span> <span class="token attr-name">matButton</span> <span class="token attr-name">*ngFor</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>let answer of poll.answers, let j <span class="token punctuation">=</span> index<span class="token punctuation">&quot;</span></span> <span class="token attr-name">[ngStyle]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>{ <span class="token punctuation">&apos;</span>backgroundColor<span class="token punctuation">&apos;</span>: colorPalette[j] }<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>answer-letter<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{ alphabet[j] }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>answer<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{ answer.answer }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>spacer<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">mat-raised-button</span> <span class="token attr-name">(click)</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>vote(j)<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Vote!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mat-list-item</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mat-list</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>pie-container<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ngx-charts-advanced-pie-chart</span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">display</span><span class="token punctuation">:</span> inline-block<span class="token punctuation">;</span></span><span class="token punctuation">&quot;</span></span>
+              <span class="token attr-name">[results]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>results<span class="token punctuation">&quot;</span></span>
+              <span class="token attr-name">[scheme]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>colorScheme<span class="token punctuation">&quot;</span></span>
+              <span class="token attr-name">labels</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span>
+              <span class="token attr-name">gradient</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span>
+              <span class="token attr-name">explodeSlices</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ngx-charts-advanced-pie-chart</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mat-card-content</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mat-card</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<p>And add a few styles:
+<code>poll.component.scss</code></p>
+<pre class="language-"><code class="lang-scss"><span class="token selector">.answer-list </span><span class="token punctuation">{</span>
+  <span class="token selector">.mat-list-item </span><span class="token punctuation">{</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 5px 0px<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.answer-letter </span><span class="token punctuation">{</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 1.5em<span class="token punctuation">;</span>
+  <span class="token property">font-weight</span><span class="token punctuation">:</span> bold<span class="token punctuation">;</span>
+  <span class="token property">margin-right</span><span class="token punctuation">:</span> 1em<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.pie-container </span><span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+  <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+
+  <span class="token selector">.item-value.ng-star-inserted </span><span class="token punctuation">{</span>
+    <span class="token property">margin-top</span><span class="token punctuation">:</span> 0 <span class="token important">!important</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<p>We can go back to our polls component template and fill in the first placeholder we left:
+<code>polls.component.html</code></p>
+<pre class="language-"><code class="lang-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>app-poll</span> <span class="token attr-name">[(poll)]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>selectedPoll<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>app-poll</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<p>We&apos;re using two-way data binding here to pass back the updated poll to the parent, which in turn propagates forward to the PollComponent and updates the view thanks to the <code>OnChanges</code> lifecycle event that we&apos;ve bound it to.</p>
+<hr>
+<p>The final step it to create a form for creating new polls.  Let&apos;s git &apos;er dun!</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="polls_component.html" class="navigation navigation-prev " aria-label="Previous page: Polls Component">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="new_poll_form_component.html" class="navigation navigation-next " aria-label="Next page: New Poll Form Component">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Poll Component","level":"1.4.4","depth":2,"next":{"title":"New Poll Form Component","level":"1.4.5","depth":2,"path":"client/new_poll_form_component.md","ref":"client/new_poll_form_component.md","articles":[]},"previous":{"title":"Polls Component","level":"1.4.3","depth":2,"path":"client/polls_component.md","ref":"client/polls_component.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","fancybox"],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"fancybox":{"helpers":{"buttons":{}}},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"client/poll_component.md","mtime":"2018-02-21T09:14:45.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-02-21T10:01:34.105Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.mousewheel.pack.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.fancybox.pack.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.fancybox-buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

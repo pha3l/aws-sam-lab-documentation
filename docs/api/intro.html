@@ -17,7 +17,15 @@
     
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fancybox/jquery.fancybox.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fancybox/jquery.fancybox-buttons.css">
                 
             
                 
@@ -62,7 +70,7 @@
     <link rel="next" href="project_setup.html" />
     
     
-    <link rel="prev" href="../sam_local.html" />
+    <link rel="prev" href="../setup.html" />
     
 
     </head>
@@ -114,25 +122,6 @@
                 </a>
             
 
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1" data-path="../sam_local.html">
-            
-                <a href="../sam_local.html">
-            
-                    
-                    SAM Local
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
             
         </li>
     
@@ -260,20 +249,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../s3_site_bucket_setup.md">
-            
-                <span>
-            
-                    
-                    Create S3 Static Site Bucket
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="../client/setup.md">
+        <li class="chapter " data-level="1.4.1" data-path="../client/setup.md">
             
                 <span>
             
@@ -286,9 +262,61 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="../client/deployment.md">
+        <li class="chapter " data-level="1.4.2" data-path="../client/poll_service.html">
             
-                <span>
+                <a href="../client/poll_service.html">
+            
+                    
+                    Poll Service
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../client/polls_component.html">
+            
+                <a href="../client/polls_component.html">
+            
+                    
+                    Polls Component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../client/poll_component.html">
+            
+                <a href="../client/poll_component.html">
+            
+                    
+                    Poll Component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../client/new_poll_form_component.html">
+            
+                <a href="../client/new_poll_form_component.html">
+            
+                    
+                    New Poll Form Component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../client/deployment.html">
+            
+                <a href="../client/deployment.html">
             
                     
                     Deployment
@@ -350,10 +378,10 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="part-i---building-the-api">Part I - Building the API</h1>
-<p>In this section we will use Typescript to author several <a href="../GLOSSARY.html#lambda" class="glossary-term" title="AWS&apos;s Function-as-a-Service platform">Lambda</a> functions, each cooresponding with a RESTful action we want to perform on our data.  We will need basic CRUD actions for creating and managing our polls, as well as an action for casting a vote on a poll.  We will create some simple abstractions that we can use across all of the functions to make dealing with the format of the <a href="../GLOSSARY.html#api-gateway" class="glossary-term" title="AWS service that facilitates the creation and management of scalable and secure APIs">API Gateway</a> request and expected response easier, and make calls to <a href="../GLOSSARY.html#dynamodb" class="glossary-term" title="AWS&apos;s highly scalable document-based NoSQL database solution">DynamoDB</a> using the simplified <code>DocumentClient</code> interface.  We will also author a <a href="../GLOSSARY.html#cloudformation" class="glossary-term" title="AWS&apos;s infrastructure-as-code service">CloudFormation</a> template that makes use of the <a href="../GLOSSARY.html#sam" class="glossary-term" title="Serverless Application Model
-see https://github.com/awslabs/serverless-application-model">SAM</a> methodology and the transform, and we&apos;ll take advantage of the <code>package</code> functionality of the <a href="../GLOSSARY.html#cloudformation" class="glossary-term" title="AWS&apos;s infrastructure-as-code service">CloudFormation</a> CLI, which allows us to use local paths in the template and automatically uploads the referenced files to an <a href="../GLOSSARY.html#s3" class="glossary-term" title="AWS&apos;s highly available and durable object-based storage solution">S3</a> bucket that the expanded template can use during deployment.</p>
-<p>Using Typescript, while possibly uncomfortable or seemingly over-complicated to those who are well-versed in standard ES6 syntax, has a major benefit when dealing with the often complex <a href="../GLOSSARY.html#aws" class="glossary-term" title="Amazon Web Services">AWS</a> Javascript SDK and other unfamiliar packages.  Since comprehensive typings have been provided by the SDK team, IDE autocompletion is a major time saver when navigating an unfamilar API, and one of the main reasons I strongly reccommend using VSCode.  Give it chance before you knock it!</p>
-<p>Let&apos;s get started...</p>
+<p>In this section we will use Typescript to author several <a href="../GLOSSARY.html#lambda" class="glossary-term" title="AWS&apos;s Function-as-a-Service platform">Lambda</a> functions, each corresponding with a RESTful action we want to perform on our data.  We will need basic CRUD actions for creating and managing our polls, as well as an action for casting a vote on a poll.  We will create some simple abstractions that we can use across all of the functions to make dealing with the format of the <a href="../GLOSSARY.html#api-gateway" class="glossary-term" title="AWS service that facilitates the creation and management of scalable and secure APIs">API Gateway</a> request and expected response easier, and make calls to <a href="../GLOSSARY.html#dynamodb" class="glossary-term" title="AWS&apos;s highly scalable document-based NoSQL database solution">DynamoDB</a> using the simplified <code>DocumentClient</code> interface, which abstracts away the concept of AttributeValues and allows the SDK to infer Dynamo types from Javascript types.  We will also author a <a href="../GLOSSARY.html#cloudformation" class="glossary-term" title="AWS&apos;s infrastructure-as-code service">CloudFormation</a> template that makes use of the <a href="../GLOSSARY.html#sam" class="glossary-term" title="Serverless Application Model
+see https://github.com/awslabs/serverless-application-model">SAM</a> methodology and the Serverless transform, and we&apos;ll take advantage of the <code>package</code> functionality of the <a href="../GLOSSARY.html#cloudformation" class="glossary-term" title="AWS&apos;s infrastructure-as-code service">CloudFormation</a> CLI which allows us to use local paths in the template and automatically upload the referenced files to an <a href="../GLOSSARY.html#s3" class="glossary-term" title="AWS&apos;s highly available and durable object-based storage solution">S3</a> bucket that the expanded template can reference during deployment.</p>
+<p>Using Typescript, while possibly uncomfortable or seemingly over-complicated to those who are well-versed in standard ES6 syntax, has a major benefit when dealing with the often complex <a href="../GLOSSARY.html#aws" class="glossary-term" title="Amazon Web Services">AWS</a> Javascript SDK and other unfamiliar packages.  Since comprehensive typings have been provided by the SDK team, IDE autocompletion is a major time saver when navigating an unfamiliar API, and one of the main reasons I strongly recommend using VSCode.  Give it chance before you knock it!</p>
+<p>Let&apos;s get this party started!</p>
 
                                 
                                 </section>
@@ -381,7 +409,7 @@ see https://github.com/awslabs/serverless-application-model">SAM</a> methodology
 
             
                 
-                <a href="../sam_local.html" class="navigation navigation-prev " aria-label="Previous page: SAM Local">
+                <a href="../setup.html" class="navigation navigation-prev " aria-label="Previous page: Development Environment">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -397,7 +425,7 @@ see https://github.com/awslabs/serverless-application-model">SAM</a> methodology
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Part I - API","level":"1.3","depth":1,"next":{"title":"Project Setup","level":"1.3.1","depth":2,"path":"api/project_setup.md","ref":"api/project_setup.md","articles":[]},"previous":{"title":"SAM Local","level":"1.2.1","depth":2,"path":"sam_local.md","ref":"sam_local.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"api/intro.md","mtime":"2018-02-13T05:11:36.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-02-16T03:53:12.618Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Part I - API","level":"1.3","depth":1,"next":{"title":"Project Setup","level":"1.3.1","depth":2,"path":"api/project_setup.md","ref":"api/project_setup.md","articles":[]},"previous":{"title":"Development Environment","level":"1.2","depth":1,"path":"setup.md","ref":"setup.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","fancybox"],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"fancybox":{"helpers":{"buttons":{}}},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"api/intro.md","mtime":"2018-02-21T06:13:12.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-02-21T10:01:34.105Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -405,6 +433,26 @@ see https://github.com/awslabs/serverless-application-model">SAM</a> methodology
         
     <script src="../gitbook/gitbook.js"></script>
     <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.mousewheel.pack.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.fancybox.pack.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.fancybox-buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/plugin.js"></script>
+        
     
         
         <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>

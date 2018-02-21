@@ -1,5 +1,5 @@
 # Project Setup
-Let's get this party started.  Begin by creating a new folder for the backend API project:
+Begin by creating a new folder for the backend API project:
 ```bash
 $ mkdir poll-app-api
 $ cd poll-app-api
@@ -8,7 +8,10 @@ Use the Yeoman generator we installed earlier to initialize the project:
 ```bash
 $ yo aws-sam-typescript
 ```
-<img src="../images/api/project_setup/yeoman-run.gif" />
+<div style="text-align: center">
+    <img src="../images/api/project_setup/yeoman-run.gif" />
+</div>
+
 Make sure that you select 'yes' to the question "Install aws-sdk library?"
 
 Open the project in your editor and you should have a directory structure similar to the following:
@@ -45,6 +48,5 @@ It will take a bit of time to pull the docker image for the first run, but if ev
 
 ---
 
-Still with me? Good! We're now all set up and ready to start writing our functions and fleshing out the API's functionality! Before we move on, go ahead and remove the `helloworldsample.ts` and the `helloworld.json` files.
-
+Still with me? Good! We're now all set up and ready to start writing our functions and fleshing out the API's functionality! Before we move on, go ahead and remove the `helloworldsample.ts` and the `helloworld.json` files.  You can also remove the `helloworldsample` directory from the `dist` folder.
 

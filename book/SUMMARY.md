@@ -2,7 +2,6 @@
 
 * [Introduction](README.md)
 * [Development Environment](setup.md)
-    * [SAM Local](sam_local.md)
 * [Part I - API](api/intro.md)
     * [Project Setup](api/project_setup.md)
     * [DynamoDB Table Setup](api/dynamo_config.md)
@@ -12,7 +11,9 @@
     * [Vote Function](api/vote_function.md)
     * [Deployment](api/deployment.md)
 * [Part II - Client App](client/intro.md)
-    * [Create S3 Static Site Bucket](s3_site_bucket_setup.md)
     * [Angular Project Setup](client/setup.md)
-    ...
+    * [Poll Service](client/poll_service.md)
+    * [Polls Component](client/polls_component.md)
+    * [Poll Component](client/poll_component.md)
+    * [New Poll Form Component](client/new_poll_form_component.md)
     * [Deployment](client/deployment.md)

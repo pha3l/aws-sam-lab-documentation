@@ -17,7 +17,15 @@
     
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fancybox/jquery.fancybox.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fancybox/jquery.fancybox-buttons.css">
                 
             
                 
@@ -59,7 +67,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../s3_site_bucket_setup.md" />
+    <link rel="next" href="setup.md" />
     
     
     <link rel="prev" href="../api/deployment.html" />
@@ -114,25 +122,6 @@
                 </a>
             
 
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1" data-path="../sam_local.html">
-            
-                <a href="../sam_local.html">
-            
-                    
-                    SAM Local
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
             
         </li>
     
@@ -260,20 +249,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../s3_site_bucket_setup.md">
-            
-                <span>
-            
-                    
-                    Create S3 Static Site Bucket
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="setup.md">
+        <li class="chapter " data-level="1.4.1" data-path="setup.md">
             
                 <span>
             
@@ -286,9 +262,61 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="deployment.md">
+        <li class="chapter " data-level="1.4.2" data-path="poll_service.html">
             
-                <span>
+                <a href="poll_service.html">
+            
+                    
+                    Poll Service
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="polls_component.html">
+            
+                <a href="polls_component.html">
+            
+                    
+                    Polls Component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="poll_component.html">
+            
+                <a href="poll_component.html">
+            
+                    
+                    Poll Component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="new_poll_form_component.html">
+            
+                <a href="new_poll_form_component.html">
+            
+                    
+                    New Poll Form Component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="deployment.html">
+            
+                <a href="deployment.html">
             
                     
                     Deployment
@@ -350,6 +378,116 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="client-application">Client Application</h1>
+<p>Let&apos;s dive in to building the client app.  We&apos;ll be utilizing <a href="../GLOSSARY.html#angular" class="glossary-term" title="A frontend Javascript framework for building rich, interactive Single Page Applications">Angular</a> 5 along with <a href="../GLOSSARY.html#angular" class="glossary-term" title="A frontend Javascript framework for building rich, interactive Single Page Applications">Angular</a> Material to build a simple application to interface with our API.  We&apos;ll create functionality for creating new polls, displaying them with a visualization, and voting for a particular answer.</p>
+<p>Begin by initializing a new <a href="../GLOSSARY.html#angular" class="glossary-term" title="A frontend Javascript framework for building rich, interactive Single Page Applications">Angular</a> project with sass styles:</p>
+<pre class="language-"><code class="lang-bash">$ ng new poll-app-client --styles scss
+</code></pre>
+<p>After the project creation completes, open it in your editor.  Let&apos;s install a couple of dependencies.</p>
+<p><a href="../GLOSSARY.html#angular" class="glossary-term" title="A frontend Javascript framework for building rich, interactive Single Page Applications">Angular</a> Material</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">npm</span> <span class="token function">install</span> --save @angular/material @angular/cdk
+</code></pre>
+<p><a href="../GLOSSARY.html#angular" class="glossary-term" title="A frontend Javascript framework for building rich, interactive Single Page Applications">Angular</a> Animations Module</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">npm</span> <span class="token function">install</span> --save @angular/animations
+</code></pre>
+<p>This should get us going.  Let&apos;s set up animations for the Material components.  In <code>src/app/app.module.ts</code>, add <code>BrowserAnimationsModule</code> to the <code>imports</code> array, and import it with <code>import { BrowserAnimationsModule } from &apos;@angular/platform-browser/animations&apos;;</code>.  The file should now look like:</p>
+<pre class="language-"><code class="lang-typescript"><span class="token keyword">import</span> <span class="token punctuation">{</span> BrowserModule <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@angular/platform-browser&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> BrowserAnimationsModule <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@angular/platform-browser/animations&apos;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> NgModule <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@angular/core&apos;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> AppComponent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;./app.component&apos;</span><span class="token punctuation">;</span>
+
+@<span class="token function">NgModule</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  declarations<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    AppComponent
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  imports<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    BrowserModule<span class="token punctuation">,</span>
+    BrowserAnimationsModule
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  providers<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  bootstrap<span class="token punctuation">:</span> <span class="token punctuation">[</span>AppComponent<span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AppModule</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+</code></pre>
+<p>Open the <code>styles.scss</code> file and add an import for a Material theme.  You can choose one of:</p>
+<ul>
+<li>deeppurple-amber.css</li>
+<li>indigo-pink.css</li>
+<li>pink-bluegrey.css</li>
+<li>purple-green.css
+The import should look like this:<pre class="language-"><code class="lang-scss"><span class="token keyword">@import</span> <span class="token string">&apos;~@angular/material/prebuilt-themes/deeppurple-amber.css&apos;</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+</ul>
+<p>Below this, let&apos;s add some global styles to get started:</p>
+<pre class="language-"><code class="lang-scss"><span class="token keyword">@import</span> <span class="token url">url</span><span class="token punctuation">(</span><span class="token string">&apos;https://fonts.googleapis.com/css?family=Roboto:400,700&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token selector">html </span><span class="token punctuation">{</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> #f6f6f6<span class="token punctuation">;</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">body </span><span class="token punctuation">{</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">font-family</span><span class="token punctuation">:</span> <span class="token string">&apos;Roboto&apos;</span>, sans-serif<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.flex-row </span><span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+  <span class="token property">flex-direction</span><span class="token punctuation">:</span> row<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.full-width </span><span class="token punctuation">{</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Now let&apos;s set up a very simple layout for the top-level app component.  Open the <code>app.component.ts</code> file and replace the contents with the following:</p>
+<pre class="language-"><code class="lang-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mat-toolbar</span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>primary<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>{{ title }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mat-toolbar</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<p>The double curly braces are <a href="../GLOSSARY.html#angular" class="glossary-term" title="A frontend Javascript framework for building rich, interactive Single Page Applications">Angular</a>&apos;s template syntax, so we&apos;re pulling a value from the component called <code>title</code> and injecting it into the <code>span</code> element. You can change the value for <code>title</code> in <code>app.component.ts</code>:</p>
+<pre class="language-"><code class="lang-typescript"><span class="token keyword">import</span> <span class="token punctuation">{</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@angular/core&apos;</span><span class="token punctuation">;</span>
+
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  selector<span class="token punctuation">:</span> <span class="token string">&apos;app-root&apos;</span><span class="token punctuation">,</span>
+  templateUrl<span class="token punctuation">:</span> <span class="token string">&apos;./app.component.html&apos;</span><span class="token punctuation">,</span>
+  styleUrls<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&apos;./app.component.scss&apos;</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AppComponent</span> <span class="token punctuation">{</span>
+  title <span class="token operator">=</span> <span class="token string">&apos;My Serverless Polling App&apos;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>We used a Material toolbar component in the component template, so we&apos;ll need to import the module it lives in in our  so it will resolve properly.  To save some time, we&apos;ll import all of the Material components we&apos;ll be using now.  In <code>app.module.ts</code>, add to the <code>imports</code> array (and also add module imports, but if you&apos;re using VSCode it should help you out with this):</p>
+<pre class="language-"><code class="lang-typescript"><span class="token keyword">import</span> <span class="token punctuation">{</span> MatButtonModule<span class="token punctuation">,</span>
+         MatCardModule<span class="token punctuation">,</span>
+         MatListModule<span class="token punctuation">,</span>
+         MatDividerModule<span class="token punctuation">,</span>
+         MatInputModule<span class="token punctuation">,</span>
+         MatToolbarModule <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@angular/material&apos;</span><span class="token punctuation">;</span>
+
+<span class="token operator">...</span>
+
+imports<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    BrowserModule<span class="token punctuation">,</span>
+    BrowserAnimationsModule<span class="token punctuation">,</span>
+    MatToolbarModule<span class="token punctuation">,</span>
+    MatDividerModule<span class="token punctuation">,</span>
+    MatCardModule<span class="token punctuation">,</span>
+    MatListModule<span class="token punctuation">,</span>
+    MatButtonModule<span class="token punctuation">,</span>
+    MatInputModule
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+
+<span class="token operator">...</span>
+</code></pre>
+<p>In a separate terminal window, run the following to get the <a href="../GLOSSARY.html#angular" class="glossary-term" title="A frontend Javascript framework for building rich, interactive Single Page Applications">Angular</a> dev server running.  We&apos;ll keep it running for the duration of the tutorial so we can see our changes as we go:</p>
+<pre class="language-"><code class="lang-bash">$ ng serve -o
+</code></pre>
+<p>This should open a window in your default browser showing the basic <a href="../GLOSSARY.html#angular" class="glossary-term" title="A frontend Javascript framework for building rich, interactive Single Page Applications">Angular</a> starter project.</p>
+<p>Let&apos;s move on to building a component to list existing polls in the next section.</p>
 
                                 
                                 </section>
@@ -382,7 +520,7 @@
                 </a>
                 
                 
-                <a href="../s3_site_bucket_setup.md" class="navigation navigation-next " aria-label="Next page: Create S3 Static Site Bucket">
+                <a href="setup.md" class="navigation navigation-next " aria-label="Next page: Angular Project Setup">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -393,7 +531,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Part II - Client App","level":"1.4","depth":1,"next":{"title":"Create S3 Static Site Bucket","level":"1.4.1","depth":2,"path":"s3_site_bucket_setup.md","ref":"s3_site_bucket_setup.md","articles":[]},"previous":{"title":"Deployment","level":"1.3.7","depth":2,"path":"api/deployment.md","ref":"api/deployment.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"client/intro.md","mtime":"2018-02-13T04:26:37.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-02-16T03:53:12.618Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Part II - Client App","level":"1.4","depth":1,"next":{"title":"Angular Project Setup","level":"1.4.1","depth":2,"path":"client/setup.md","ref":"client/setup.md","articles":[]},"previous":{"title":"Deployment","level":"1.3.7","depth":2,"path":"api/deployment.md","ref":"api/deployment.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","fancybox"],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"fancybox":{"helpers":{"buttons":{}}},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"client/intro.md","mtime":"2018-02-21T07:56:17.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-02-21T10:01:34.105Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -401,6 +539,26 @@
         
     <script src="../gitbook/gitbook.js"></script>
     <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.mousewheel.pack.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.fancybox.pack.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.fancybox-buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/plugin.js"></script>
+        
     
         
         <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>

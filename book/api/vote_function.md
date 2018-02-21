@@ -11,7 +11,7 @@ public update(id: string, updateExpression: UpdateExpression, expressionAttribut
         },
         UpdateExpression: updateExpression,
         ExpressionAttributeValues: expressionAttributeValues,
-        ReturnValues: "ALL_NEW"
+        ReturnValues: "ALL_NEW" //tells Dynamo we'd like to get back the updated record
     } as UpdateItemInput;
 
     return new Promise<UpdateItemOutput>((resolve, reject) => {
@@ -30,31 +30,22 @@ import { Poll } from './poll.model';
 import { DynamoRepository } from './dynamo-repository';
 import { ApiGatewayResponse, ResponseType } from './api-gateway-response';
 import { DocumentClient } from 'aws-sdk/lib/dynamodb/document_client';
+import { UpdateItemInput, UpdateExpression, ExpressionAttributeValueMap } from 'aws-sdk/clients/dynamodb';
 import { DynamoDB } from 'aws-sdk';
-import { UpdateItemInput } from 'aws-sdk/clients/dynamodb';
 
 export const handler: Handler = (event: APIGatewayEvent, context: Context, callback?: Callback) => {
-    const pollId = event.pathParameters.pollId;
+    const pollId = event.pathParameters.id;
     const answerIndex = event.pathParameters.answerIndex;
 
-    const dynamoClient: DocumentClient = new DynamoDB.DocumentClient;
+    let updateExpression : UpdateExpression = "SET answers[" + answerIndex + "].votes = answers[" + answerIndex + "].votes + :one";
+    let expressionAttributeValues : DynamoDB.DocumentClient.ExpressionAttributeValueMap = {
+        ':one' : 1
+    };
 
-    let params = {
-        TableName: process.env.TABLE_NAME,
-        Key: {
-            id: pollId
-        },
-        UpdateExpression: "SET answers[" + answerIndex + "].votes = answers[" + answerIndex + "].votes + :one",
-        ExpressionAttributeValues: {
-           ':one' : 1
-        },
-        ReturnValues: "ALL_NEW"
-    } as UpdateItemInput;
-
-    dynamoClient.update(params).promise().then(data => {
-        callback(null, new ApiGatewayResponse(ResponseType.OK, data));
-    }, error => {
-        callback(null, new ApiGatewayResponse(ResponseType.SERVER_ERROR, error));
+    new DynamoRepository<Poll>(process.env.TABLE_NAME).update(pollId, updateExpression, expressionAttributeValues).then((val) => {
+        callback(null, new ApiGatewayResponse(ResponseType.OK, val));
+    }).catch((err) => {
+        callback(null, new ApiGatewayResponse(ResponseType.SERVER_ERROR, err));
     });
 }
 ```
@@ -102,12 +93,12 @@ Should become:
 ```
 `webpack`, then invoke the function:
 ```bash
-$ AWS_REGION="us-west-2" TABLE_NAME="poll-testdb" sam local invoke CastVote -e mocks/vote.json
+$ TABLE_NAME="poll-test" sam local invoke CastVote -e mocks/vote.json
 ```
 
 Now let's check the record:
 ```bash
-$ aws --region us-west-2 dynamodb scan --table-name poll-testdb 
+$ aws --region us-west-2 dynamodb scan --table-name poll-test --endpoint http://localhost:8000
 {
     "Items": [
         {
@@ -158,5 +149,7 @@ $ aws --region us-west-2 dynamodb scan --table-name poll-testdb
 }
 ```
 The vote count for the first answer, Black Bear, is now 1! Hooray!
+
+---
 
 We're done authoring the backend of our application.  Let's wrap up a couple loose ends in the CloudFormation template and get it deployed in the last part of this section.

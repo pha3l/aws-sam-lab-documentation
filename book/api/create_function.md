@@ -1,5 +1,5 @@
 # Authoring the Create Function
-With Typescript, we can use an interface to define the structure and expected properties (and thier types) of an object, and use this to our advantage as we write our application.  We'll use this to ensure we have a consistent data model across all of our functions.  Let's start by defining an interface, `poll.model.ts`, at the root of the `src` folder:
+With Typescript, we can use an interface to define the structure and expected properties (and their types) of an object, and use this to our advantage as we write our application to provide type-checking.  We'll use this to ensure we have a consistent data model across all of our functions.  Let's start by defining an interface, `poll.model.ts`, at the root of the `src` folder:
 
 `src/poll.model.ts`
 ```typescript
@@ -8,12 +8,12 @@ export interface Poll {
     title: string;
     question: string;
     answers: Array<string>;
-    createdAt: Date;
-    updateAt: Date;
+    createdAt: number;
+    updatedAt: number;
 }
 ```
 
-But, we also need a way to track the number of votes for each answer.  In the same file below the `Poll` interface definition, create another interface, `PollAnswer` as follows:
+But we also need a way to track the number of votes for each answer.  In the same file below the `Poll` interface definition, create another interface, `PollAnswer` as follows:
 ```typescript
 export interface PollAnswer {
     answer: string;
@@ -29,8 +29,8 @@ export interface Poll {
     title: string;
     question: string;
     answers: Array<PollAnswer>;
-    createdAt: Date;
-    updateAt: Date;
+    createdAt: number;
+    updatedAt: number;
 }
 
 export interface PollAnswer {
@@ -48,9 +48,18 @@ import { DynamoDB } from 'aws-sdk';
 import { PutItemInput, PutItemOutput } from 'aws-sdk/clients/dynamodb';
 
 export class DynamoRepository<T> {
-    private dynamoClient : DocumentClient = new DynamoDB.DocumentClient();
+    private dynamoClient : DocumentClient;
 
-    constructor(private tableName: string) {}
+    constructor(private tableName: string) {
+        if (tableName.match(/.*-test$/g)) {
+            console.log("Using local Dynamo table: " + tableName);
+            this.dynamoClient = new DynamoDB.DocumentClient({
+                endpoint: 'http://172.16.123.1:8000'
+            });
+        } else {
+            this.dynamoClient = new DynamoDB.DocumentClient();
+        }
+    }
 
     public create(entity: T) : Promise<PutItemOutput> {
         let params = {
@@ -68,18 +77,15 @@ export class DynamoRepository<T> {
 
 }
 ```
-What we've done here is create a generic repository class that will work with any table/entity. Note that we've pulled the region for the table out of the environment, so we'll have to make sure this is set later.
+What we've done here is create a generic repository class that will work with any table/entity.  Note the constructor--we've set it up to check the name of the table against a regular expression looking for a `-test` suffix.  If it's there, we'll instantiate the `DocumentClient` with a local endpoint.  We're using this sort of strange suffix strategy to prevent introducing an additional environment variable because for `sam-local` to pick up environment variables, they have to be defined in the template, and we don't really want to add one to the production environment just so our tests will run properly.  All this will allow us to use a local Dynamo table for testing.  The IP we've used, `172.16.123.1`, is a random IP in the private IP space.  The reason that we're not just using `localhost` here is because when we test our functions with `sam local`, the functions will run in a docker container, while the Dynamo Local endpoint will be on localhost.  Therefore we'll have to set up an alias so the function can find localhost a little later.
 
-Along the same lines, let's create a class to represent the response that API Gateway expects when invoking the lambda on the user's behalf.  Create a file `api-gateway-response.ts`:
+Along the same lines, let's create a class to represent the response that API Gateway expects when invoking the lambda on the user's behalf.  Setting the `Access-Control-Allow-Origin` header is **VERY IMPORTANT**, as we'll be interacting with the API via AJAX calls, and thus CORS will be an issue. Create a file `api-gateway-response.ts`:
 
 `src/api-gateway-response.ts`
 ```typescript
 export class ApiGatewayResponse {
     private statusCode: number;
-    private headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": true
-    }
+    private headers: {};
     private body: string;
     private isBase64Encoded: boolean;
 
@@ -87,12 +93,16 @@ export class ApiGatewayResponse {
         this.statusCode = responseType;
         this.body = JSON.stringify(body);
         this.isBase64Encoded = isBase64Encoded || false;
+        this.headers = {
+            "Access-Control-Allow-Origin": "*"
+        };
     }   
 }
 
 export enum ResponseType {
     OK = 200,
     SERVER_ERROR = 500,
+    NOT_FOUND = 404
 }
 ```
 
@@ -155,39 +165,51 @@ CreatePoll:
                 TABLE_NAME: !Ref Polls
 ```
 
-Here you can see we've added a new function with a **Logical ID** of `CreatePoll`, and pointed it at the transpiled, packaged and minified webpack output for the function script.  We've also given the function a managed policy that gives it full access to DynamoDB resources.  While this isn't the best idea for production use and you'd want to define a role with more limited scope (which you can do right in the CloudFormation template and reference directly!), it will be fine for our purpose. We've also defined the event triggers for the function, in this case an API Gateway route of `/polls` with a `POST` HTTP method.  Finally, we've given the function access to an environment variable called `TABLE_NAME`, which we already used in the function code to get the table name. We've then used the !Ref intrinsic function to obtain the table name from the resource defined above.
+Here you can see we've added a new function with a **Logical ID** of `CreatePoll`, and pointed it at the transpiled, packaged, and minified webpack output for the function script.  We've also given the function a managed policy, `AmazonDynamoDBFullAccess`, that gives it full access to DynamoDB resources.  While this isn't the best idea for production use and you'd want to define a role with more limited scope (which you can do right in the CloudFormation template and reference directly!), it will be fine for our purposes. We've also defined the event triggers for the function, in this case an API Gateway route of `/polls` with a `POST` HTTP method.  Finally, we've given the function access to an environment variable called `TABLE_NAME`, which we already used in the function code to fetch the table name. We've then used the !Ref intrinsic function to obtain the table name from the resource defined above.  This is necessary because while we've given the table a *logical name* of `Polls`, the physical name will be a generated value consisting of the stack name, the logical name, and a random identifier at deploy time.
 
 ===
 
-With our first function authored, howabout a quick test to see how we're doing so far? Let's generate a mock payload using `sam-local`:
+With our first function authored, let's do a quick test to see how we're doing so far. Let's generate a mock payload using `sam-local`:
 
 ```bash
 $ sam local generate-event api -m POST -b "{\\\"title\\\":\\\"Test Poll\\\", \\\"question\\\": \\\"Which bear is best?\\\", \\\"answers\\\": [{\\\"answer\\\":\\\"Black Bear\\\", \\\"votes\\\":0},{\\\"answer\\\":\\\"That's debatable...\\\", \\\"votes\\\":0}]}" > mocks/create-poll.json
 ``` 
 
-Now, we'll need a real dynamodb table to use for testing, so although in the end we'd like to provision it with the SAM CloudFormation template, let's create a table to use for our testing. We'll do so using the CLI:
+Now, we'll need a local DynamoDB table to use for testing.  To start up the local Dynamo server that we downloaded earlier, navigate to the directory you extracted it to and run the following (do this in a separate terminal as we want to keep it running from now on):
+```bash
+$ java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
+```
+
+ let's create a table to use for our testing. We'll do so using the CLI:
 ```bash
 $ aws dynamodb create-table --region us-west-2 \
                             --table-name poll-testdb \
                             --attribute-definitions AttributeName=id,AttributeType=S \
                             --key-schema AttributeName=id,KeyType=HASH \
-                            --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 
+                            --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
+                            --endpoint-url http://localhost:8000
 ```
+Note that this is the exact same CLI command you'd use to provision a real DynamoDB table, with the simple addition of an `endpoint-url` parameter to redirect the request to the local server.
+
+Earlier we talked about setting up an alias so the container-bound function can find the local mock-Dynamo server.  Let's do that now:
+```
+$ sudo ifconfig lo0 alias 172.16.123.1
+```
+
 Run `webpack` to generate the function package:
 ```bash
 $ webpack
 ```
+
 Now let's invoke the function using `sam-local`, sending our mock event as the payload:
 ```bash
-$ AWS_REGION="us-west-2" TABLE_NAME="poll-testdb" sam local invoke CreatePoll -e mocks/create-poll.json
+$ TABLE_NAME="poll-test" sam local invoke CreatePoll -e mocks/create-poll.json
 ```
 Note that we passed the environment variables needed by the function directly to `sam-local`.  Even if they are defined in the CloudFormation template, `sam-local` will not pick them up so this is necessary.
 
-If everything went okay, you should see `{"statusCode":200,"body":{}}` at the bottom of the output.  You can then head to the console to check out the table contents:
-<img src="../images/api/create_function/dynamo-put-success.png"/>
-Alternatively, you can use the CLI to check:
+If everything went okay, you should see `{"statusCode":200,"body":{}}` at the bottom of the output.  You can use the CLI to check:
 ```bash
-$ aws --region us-west-2 dynamodb scan --table-name poll-testdb
+$ aws dynamodb scan --table-name poll-test --endpoint http://localhost:8000
 {
     "Items": [
         {
@@ -237,4 +259,7 @@ $ aws --region us-west-2 dynamodb scan --table-name poll-testdb
     "ConsumedCapacity": null
 }
 ```
+
+---
+
 As you can see, we successfully created a record in the table! Hold on to the id of the returned record, we'll use it for further tests.  Let's continue fleshing out the API functionality. In the next section, we'll create a function to retrieve a single poll record by it's id.

@@ -41,7 +41,7 @@ ListPolls:
         CodeUri: ./dist/listpolls/listpolls.zip
         Handler: index.handler
         Runtime: nodejs6.10
-        Policies: AmazonDynamoDBFullAccess
+        Policies: AmazonDynamoDBReadOnlyAccess
         Events:
         CreatePoll:
             Type: Api
@@ -58,10 +58,10 @@ $ sam local generate-event api --method GET --path /polls -r /polls > ./mocks/li
 ```
 Run `webpack`, then test the function:
 ```bash
-$ AWS_REGION="us-west-2" TABLE_NAME="poll-testdb" sam local invoke ListPolls -e mocks/list-polls.json
+$ TABLE_NAME="poll-test" sam local invoke ListPolls -e mocks/list-polls.json
 ```
 And you should see a response, again containing the same poll we created earlier.
 
 ---
 
-Moving right along! Let's knock out the update function next.
+In the next section we'll write a function that will allow votes to be cast for a particular answer on a poll.

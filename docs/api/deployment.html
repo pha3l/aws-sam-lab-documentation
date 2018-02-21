@@ -17,7 +17,15 @@
     
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fancybox/jquery.fancybox.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fancybox/jquery.fancybox-buttons.css">
                 
             
                 
@@ -114,25 +122,6 @@
                 </a>
             
 
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1" data-path="../sam_local.html">
-            
-                <a href="../sam_local.html">
-            
-                    
-                    SAM Local
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
             
         </li>
     
@@ -260,20 +249,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../s3_site_bucket_setup.md">
-            
-                <span>
-            
-                    
-                    Create S3 Static Site Bucket
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="../client/setup.md">
+        <li class="chapter " data-level="1.4.1" data-path="../client/setup.md">
             
                 <span>
             
@@ -286,9 +262,61 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="../client/deployment.md">
+        <li class="chapter " data-level="1.4.2" data-path="../client/poll_service.html">
             
-                <span>
+                <a href="../client/poll_service.html">
+            
+                    
+                    Poll Service
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../client/polls_component.html">
+            
+                <a href="../client/polls_component.html">
+            
+                    
+                    Polls Component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../client/poll_component.html">
+            
+                <a href="../client/poll_component.html">
+            
+                    
+                    Poll Component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../client/new_poll_form_component.html">
+            
+                <a href="../client/new_poll_form_component.html">
+            
+                    
+                    New Poll Form Component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../client/deployment.html">
+            
+                <a href="../client/deployment.html">
             
                     
                     Deployment
@@ -352,57 +380,206 @@
                                 <h1 id="api-deployment">API Deployment</h1>
 <p>We&apos;re done writing our Lambdas and we&apos;re ready to deploy our <a href="../GLOSSARY.html#sam" class="glossary-term" title="Serverless Application Model
 see https://github.com/awslabs/serverless-application-model">SAM</a> application.  The <code>sam-local</code> package we&apos;ve been using to test our functions locally has some helpful utilities for deployment, so we&apos;ll take advantage of these.</p>
-<p>Our functions access two environment variables at runtime, so we need to make sure both of these are available to the <a href="../GLOSSARY.html#lambda" class="glossary-term" title="AWS&apos;s Function-as-a-Service platform">lambda</a> runtime.  We have already provided the <code>TABLE_NAME</code> using the <code>!Ref</code> intrinsic function to each function separately, but let&apos;s specify <code>AWS_REGION</code> globally.  To do this, we&apos;ll need to add the same structure we used in the function resources to the top level of our yaml structure, let&apos;s put it right below the <code>Description</code> parameter:</p>
-<pre><code class="lang-yaml"><span class="hljs-attr">AWSTemplateFormatVersion:</span> <span class="hljs-number">2010</span><span class="hljs-bullet">-09</span><span class="hljs-bullet">-09</span>
-<span class="hljs-attr">Transform:</span> AWS::Serverless<span class="hljs-bullet">-2016</span><span class="hljs-bullet">-10</span><span class="hljs-bullet">-31</span>
-<span class="hljs-attr">Description:</span> A serverless poll app
-<span class="hljs-attr">Environment:</span>
-<span class="hljs-attr">  Variables:</span>
-<span class="hljs-attr">    AWS_REGION:</span> !Ref AWS::Region
+<h2 id="finishing-touches">Finishing Touches</h2>
+<p>One more thing that would be useful would be if the stack outputted the <a href="../GLOSSARY.html#api-gateway" class="glossary-term" title="AWS service that facilitates the creation and management of scalable and secure APIs">API Gateway</a> endpoint after provisioning the resources.  Let&apos;s add an output to do this, at the root level below the <code>Description</code> property:</p>
+<pre class="language-"><code class="lang-yaml"><span class="token key atrule">Outputs</span><span class="token punctuation">:</span>
+  <span class="token key atrule">ApiEndpoint</span><span class="token punctuation">:</span>
+    <span class="token key atrule">Description</span><span class="token punctuation">:</span> The endpoint of the Prod stage of the implicit API Gateway resource
+    <span class="token key atrule">Value</span><span class="token punctuation">:</span> <span class="token tag">!Sub</span> <span class="token string">&quot;https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/&quot;</span>
 </code></pre>
-<p>We&apos;ve used the <code>AWS::Region</code> pseudo-parameter along with the <code>!Ref</code> intrinsic function to get the region that the template is being deployed in.</p>
-<p>Now, we can ensure our template is syntactically correct by running:</p>
-<pre><code class="lang-bash">$ sam validate
+<hr>
+<p>Here&apos;s the final template for reference:</p>
+<pre class="language-"><code class="lang-yaml"><span class="token key atrule">AWSTemplateFormatVersion</span><span class="token punctuation">:</span> <span class="token datetime number">2010-09-09</span>
+<span class="token key atrule">Transform</span><span class="token punctuation">:</span> AWS<span class="token punctuation">:</span><span class="token punctuation">:</span>Serverless<span class="token punctuation">-</span><span class="token datetime number">2016-10-31</span>
+<span class="token key atrule">Description</span><span class="token punctuation">:</span> A serverless poll app
+<span class="token key atrule">Outputs</span><span class="token punctuation">:</span>
+  <span class="token key atrule">ApiEndpoint</span><span class="token punctuation">:</span>
+    <span class="token key atrule">Description</span><span class="token punctuation">:</span> The endpoint of the Prod stage of the implicit API Gateway resource
+    <span class="token key atrule">Value</span><span class="token punctuation">:</span> <span class="token tag">!Sub</span> <span class="token string">&quot;https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/&quot;</span>
+<span class="token key atrule">Resources</span><span class="token punctuation">:</span>
+  <span class="token key atrule">Polls</span><span class="token punctuation">:</span>                   
+    <span class="token key atrule">Type</span><span class="token punctuation">:</span> AWS<span class="token punctuation">:</span><span class="token punctuation">:</span>Serverless<span class="token punctuation">:</span><span class="token punctuation">:</span>SimpleTable
+    <span class="token key atrule">PrimaryKey</span><span class="token punctuation">:</span>
+      <span class="token key atrule">Name</span><span class="token punctuation">:</span> id
+      <span class="token key atrule">Type</span><span class="token punctuation">:</span> String
+    <span class="token key atrule">ProvisionedThroughput</span><span class="token punctuation">:</span>
+      <span class="token key atrule">ReadCapacityUnits</span><span class="token punctuation">:</span> <span class="token number">5</span>
+      <span class="token key atrule">WriteCapacityUnits</span><span class="token punctuation">:</span> <span class="token number">5</span>
+  <span class="token key atrule">CreatePoll</span><span class="token punctuation">:</span>
+    <span class="token key atrule">Type</span><span class="token punctuation">:</span> AWS<span class="token punctuation">:</span><span class="token punctuation">:</span>Serverless<span class="token punctuation">:</span><span class="token punctuation">:</span>Function
+    <span class="token key atrule">Properties</span><span class="token punctuation">:</span>
+      <span class="token key atrule">CodeUri</span><span class="token punctuation">:</span> ./dist/createpoll/createpoll.zip
+      <span class="token key atrule">Runtime</span><span class="token punctuation">:</span> nodejs6.10
+      <span class="token key atrule">Handler</span><span class="token punctuation">:</span> index.handler
+      <span class="token key atrule">Timeout</span><span class="token punctuation">:</span> <span class="token number">120</span>
+      <span class="token key atrule">Events</span><span class="token punctuation">:</span>
+        <span class="token key atrule">CreatePoll</span><span class="token punctuation">:</span>
+          <span class="token key atrule">Type</span><span class="token punctuation">:</span> Api
+          <span class="token key atrule">Properties</span><span class="token punctuation">:</span>
+            <span class="token key atrule">Path</span><span class="token punctuation">:</span> /polls
+            <span class="token key atrule">Method</span><span class="token punctuation">:</span> POST
+      <span class="token key atrule">Policies</span><span class="token punctuation">:</span> AmazonDynamoDBFullAccess
+      <span class="token key atrule">Environment</span><span class="token punctuation">:</span>
+        <span class="token key atrule">Variables</span><span class="token punctuation">:</span>
+          <span class="token key atrule">TABLE_NAME</span><span class="token punctuation">:</span> <span class="token tag">!Ref</span> Polls
+  <span class="token key atrule">GetPoll</span><span class="token punctuation">:</span>
+    <span class="token key atrule">Type</span><span class="token punctuation">:</span> AWS<span class="token punctuation">:</span><span class="token punctuation">:</span>Serverless<span class="token punctuation">:</span><span class="token punctuation">:</span>Function
+    <span class="token key atrule">Properties</span><span class="token punctuation">:</span>
+      <span class="token key atrule">CodeUri</span><span class="token punctuation">:</span> ./dist/getpoll/getpoll.zip
+      <span class="token key atrule">Runtime</span><span class="token punctuation">:</span> nodejs6.10
+      <span class="token key atrule">Handler</span><span class="token punctuation">:</span> index.handler
+      <span class="token key atrule">Events</span><span class="token punctuation">:</span>
+        <span class="token key atrule">CreatePoll</span><span class="token punctuation">:</span>
+          <span class="token key atrule">Type</span><span class="token punctuation">:</span> Api
+          <span class="token key atrule">Properties</span><span class="token punctuation">:</span>
+            <span class="token key atrule">Path</span><span class="token punctuation">:</span> /polls/<span class="token punctuation">{</span>id<span class="token punctuation">}</span>
+            <span class="token key atrule">Method</span><span class="token punctuation">:</span> GET
+      <span class="token key atrule">Policies</span><span class="token punctuation">:</span> AmazonDynamoDBReadOnlyAccess
+      <span class="token key atrule">Environment</span><span class="token punctuation">:</span>
+        <span class="token key atrule">Variables</span><span class="token punctuation">:</span>
+          <span class="token key atrule">TABLE_NAME</span><span class="token punctuation">:</span> <span class="token tag">!Ref</span> Polls
+  <span class="token key atrule">ListPolls</span><span class="token punctuation">:</span>
+    <span class="token key atrule">Type</span><span class="token punctuation">:</span> AWS<span class="token punctuation">:</span><span class="token punctuation">:</span>Serverless<span class="token punctuation">:</span><span class="token punctuation">:</span>Function
+    <span class="token key atrule">Properties</span><span class="token punctuation">:</span>
+      <span class="token key atrule">CodeUri</span><span class="token punctuation">:</span> ./dist/listpolls/listpolls.zip
+      <span class="token key atrule">Runtime</span><span class="token punctuation">:</span> nodejs6.10
+      <span class="token key atrule">Handler</span><span class="token punctuation">:</span> index.handler
+      <span class="token key atrule">Events</span><span class="token punctuation">:</span>
+        <span class="token key atrule">CreatePoll</span><span class="token punctuation">:</span>
+          <span class="token key atrule">Type</span><span class="token punctuation">:</span> Api
+          <span class="token key atrule">Properties</span><span class="token punctuation">:</span>
+            <span class="token key atrule">Path</span><span class="token punctuation">:</span> /polls
+            <span class="token key atrule">Method</span><span class="token punctuation">:</span> GET
+      <span class="token key atrule">Policies</span><span class="token punctuation">:</span> AmazonDynamoDBReadOnlyAccess
+      <span class="token key atrule">Environment</span><span class="token punctuation">:</span>
+        <span class="token key atrule">Variables</span><span class="token punctuation">:</span>
+          <span class="token key atrule">TABLE_NAME</span><span class="token punctuation">:</span> <span class="token tag">!Ref</span> Polls
+  <span class="token key atrule">CastVote</span><span class="token punctuation">:</span>
+    <span class="token key atrule">Type</span><span class="token punctuation">:</span> AWS<span class="token punctuation">:</span><span class="token punctuation">:</span>Serverless<span class="token punctuation">:</span><span class="token punctuation">:</span>Function
+    <span class="token key atrule">Properties</span><span class="token punctuation">:</span>
+      <span class="token key atrule">CodeUri</span><span class="token punctuation">:</span> ./dist/vote/vote.zip
+      <span class="token key atrule">Runtime</span><span class="token punctuation">:</span> nodejs6.10
+      <span class="token key atrule">Handler</span><span class="token punctuation">:</span> index.handler
+      <span class="token key atrule">Events</span><span class="token punctuation">:</span>
+        <span class="token key atrule">CreatePoll</span><span class="token punctuation">:</span>
+          <span class="token key atrule">Type</span><span class="token punctuation">:</span> Api
+          <span class="token key atrule">Properties</span><span class="token punctuation">:</span>
+            <span class="token key atrule">Path</span><span class="token punctuation">:</span> /polls/<span class="token punctuation">{</span>id<span class="token punctuation">}</span>/answer/<span class="token punctuation">{</span>answerIndex<span class="token punctuation">}</span>
+            <span class="token key atrule">Method</span><span class="token punctuation">:</span> PATCH
+      <span class="token key atrule">Policies</span><span class="token punctuation">:</span> AmazonDynamoDBFullAccess
+      <span class="token key atrule">Environment</span><span class="token punctuation">:</span>
+        <span class="token key atrule">Variables</span><span class="token punctuation">:</span>
+          <span class="token key atrule">TABLE_NAME</span><span class="token punctuation">:</span> <span class="token tag">!Ref</span> Polls
 </code></pre>
-<p>If there are no errors, the output should be <code>Valid!</code>.  Note that this does not ensure that our template will provision without issues, but simply that its syntax is valid.</p>
-<p>We&apos;re now just about ready to deploy, but we need <em>one more thing</em>.  Since we&apos;ve used local path references to our code in the template, if we deployed the template as-is <a href="../GLOSSARY.html#cloudformation" class="glossary-term" title="AWS&apos;s infrastructure-as-code service">CloudFormation</a> would have no way of accessing the code.  Luckily, <a href="../GLOSSARY.html#cloudformation" class="glossary-term" title="AWS&apos;s infrastructure-as-code service">CloudFormation</a> provides a <code>package</code> operation that is designed to take care of this problem.  This takes a template file, uploads all of the referenced files to an <a href="../GLOSSARY.html#s3" class="glossary-term" title="AWS&apos;s highly available and durable object-based storage solution">S3</a> bucket, and outputs a new template that references the <a href="../GLOSSARY.html#s3" class="glossary-term" title="AWS&apos;s highly available and durable object-based storage solution">S3</a> objects instead of the local paths.  To take advantage of this, we&apos;ll need to provision an <a href="../GLOSSARY.html#s3" class="glossary-term" title="AWS&apos;s highly available and durable object-based storage solution">S3</a> bucket for it to use to store the code.  You can do this via the console or the CLI:
+<p>That should do it for the template.  Let&apos;s move on to packaging.</p>
+<h2 id="package">Package</h2>
+<p>We can ensure our template is syntactically correct by running:</p>
+<pre class="language-"><code class="lang-bash">$ sam validate
+</code></pre>
+<p>If there are no errors, the output should be <code>Valid!</code>.  Note that this does not ensure that our template will provision its defined resources without issue, but simply that its syntax is valid.</p>
+<p>We&apos;re now just about ready to deploy, but we need <em>one more thing</em>.  Since we&apos;ve used local path references to our code in the template, if we deployed the template as-is <a href="../GLOSSARY.html#cloudformation" class="glossary-term" title="AWS&apos;s infrastructure-as-code service">CloudFormation</a> would have no way of accessing the code, which is only stored locally on our development machine.  Luckily, <a href="../GLOSSARY.html#cloudformation" class="glossary-term" title="AWS&apos;s infrastructure-as-code service">CloudFormation</a> provides a <code>package</code> operation that is designed to make this very easy.  This takes a template file, uploads all of the referenced files to an <a href="../GLOSSARY.html#s3" class="glossary-term" title="AWS&apos;s highly available and durable object-based storage solution">S3</a> bucket, and outputs a new template that references the <a href="../GLOSSARY.html#s3" class="glossary-term" title="AWS&apos;s highly available and durable object-based storage solution">S3</a> objects instead of the local paths.  To take advantage of this, we&apos;ll need to provision an <a href="../GLOSSARY.html#s3" class="glossary-term" title="AWS&apos;s highly available and durable object-based storage solution">S3</a> bucket for it to use to store the code.  You can do this via the console or the CLI:
 <strong>The region you use here must be the same region you&apos;d like to deploy the application to.</strong></p>
-<pre><code class="lang-bash">$ aws s3api create-bucket --bucket my-poll-app-cfn --region us-west-2 \
-    --create-bucket-configuration LocationConstraint=us-west-2
+<pre class="language-"><code class="lang-bash">$ aws s3api create-bucket --bucket my-poll-app-cfn --region us-west-2 \
+    --create-bucket-configuration LocationConstraint<span class="token operator">=</span>us-west-2
 </code></pre>
 <p>I&apos;ve used <code>my-poll-app-cfn</code>, but remember that <a href="../GLOSSARY.html#s3" class="glossary-term" title="AWS&apos;s highly available and durable object-based storage solution">S3</a> buckets are globally unique, so you&apos;ll have to choose something else for your bucket name.  Also note that for this particular CLI call, any region outside of us-east-1 requires the <code>LocationConstraint</code> parameter passed to <code>--create-bucket-configuration</code>.  </p>
+<p>Run <code>webpack</code> one more time to be sure that our packages are up-to-date.</p>
 <p>Run the package command, specifying the bucket we just created:</p>
-<pre><code class="lang-bash">$ sam package --template-file template.yml -<span class="hljs-_">-s</span>3-bucket my-poll-app-cfn --output-template-file template-packaged.yml
+<pre class="language-"><code class="lang-bash">$ sam package --template-file template.yml --s3-bucket my-poll-app-cfn --output-template-file template-packaged.yml
 </code></pre>
-<p>Note that you can also use <code>aws cloudformation</code> instead of <code>sam</code> as the command with the same parameters to get the same result.</p>
+<p>Note that you can also use <code>aws cloudformation</code> instead of <code>sam</code> as the root command with the same parameters to get the same result.  The <code>sam</code> command is just an alias.</p>
 <p>Let&apos;s take a quick look at the <code>template-packaged.yml</code> file that was generated. Here&apos;s a snippet containing our <code>CastVote</code> resource:</p>
-<pre><code class="lang-yaml"><span class="hljs-attr">CastVote:</span>
-<span class="hljs-attr">    Properties:</span>
-<span class="hljs-attr">      CodeUri:</span> s3://my-poll-app-cfn/<span class="hljs-number">51</span>d31d05f68d1c495f3e25f5614d8f5d
-<span class="hljs-attr">      Environment:</span>
-<span class="hljs-attr">        Variables:</span>
-<span class="hljs-attr">          TABLE_NAME:</span>
-<span class="hljs-attr">            Ref:</span> Polls
-<span class="hljs-attr">      Events:</span>
-<span class="hljs-attr">        CreatePoll:</span>
-<span class="hljs-attr">          Properties:</span>
-<span class="hljs-attr">            Method:</span> PATCH
-<span class="hljs-attr">            Path:</span> /polls/{pollId}/answer/{answerIndex}
-<span class="hljs-attr">          Type:</span> Api
-<span class="hljs-attr">      Handler:</span> index.handler
-<span class="hljs-attr">      Policies:</span> AmazonDynamoDBFullAccess
-<span class="hljs-attr">      Runtime:</span> nodejs6<span class="hljs-number">.10</span>
-<span class="hljs-attr">    Type:</span> AWS::Serverless::Function
+<pre class="language-"><code class="lang-yaml"><span class="token key atrule">CastVote</span><span class="token punctuation">:</span>
+    <span class="token key atrule">Properties</span><span class="token punctuation">:</span>
+      <span class="token key atrule">CodeUri</span><span class="token punctuation">:</span> s3<span class="token punctuation">:</span>//my<span class="token punctuation">-</span>poll<span class="token punctuation">-</span>app<span class="token punctuation">-</span>cfn/51d31d05f68d1c495f3e25f5614d8f5d
+      <span class="token key atrule">Environment</span><span class="token punctuation">:</span>
+        <span class="token key atrule">Variables</span><span class="token punctuation">:</span>
+          <span class="token key atrule">TABLE_NAME</span><span class="token punctuation">:</span>
+            <span class="token key atrule">Ref</span><span class="token punctuation">:</span> Polls
+      <span class="token key atrule">Events</span><span class="token punctuation">:</span>
+        <span class="token key atrule">CreatePoll</span><span class="token punctuation">:</span>
+          <span class="token key atrule">Properties</span><span class="token punctuation">:</span>
+            <span class="token key atrule">Method</span><span class="token punctuation">:</span> PATCH
+            <span class="token key atrule">Path</span><span class="token punctuation">:</span> /polls/<span class="token punctuation">{</span>pollId<span class="token punctuation">}</span>/answer/<span class="token punctuation">{</span>answerIndex<span class="token punctuation">}</span>
+          <span class="token key atrule">Type</span><span class="token punctuation">:</span> Api
+      <span class="token key atrule">Handler</span><span class="token punctuation">:</span> index.handler
+      <span class="token key atrule">Policies</span><span class="token punctuation">:</span> AmazonDynamoDBFullAccess
+      <span class="token key atrule">Runtime</span><span class="token punctuation">:</span> nodejs6.10
+    <span class="token key atrule">Type</span><span class="token punctuation">:</span> AWS<span class="token punctuation">:</span><span class="token punctuation">:</span>Serverless<span class="token punctuation">:</span><span class="token punctuation">:</span>Function
 </code></pre>
-<p>Our local path in the <code>CodeUri</code> property has been replaced with an <a href="../GLOSSARY.html#s3" class="glossary-term" title="AWS&apos;s highly available and durable object-based storage solution">S3</a> object path.</p>
-<hr>
+<p>Notice that the previously local path in the <code>CodeUri</code> property has been replaced with an <a href="../GLOSSARY.html#s3" class="glossary-term" title="AWS&apos;s highly available and durable object-based storage solution">S3</a> object URI.</p>
+<h2 id="deploy">Deploy</h2>
 <p>The time has finally come.  Let&apos;s deploy the stack:</p>
-<pre><code class="lang-bash">
-
+<pre class="language-"><code class="lang-bash">$ sam deploy --template-file template-packaged.yml --stack-name my-poll-app-api --capabilities CAPABILITY_IAM --region us-west-2
 </code></pre>
-<p>If there is a problem with the stack creation, you can remove the failed stack, which will be stuck in a <code>ROLLBACK_COMPLETE</code> state and thus won&apos;t let you redeploy the same stack, with the following:</p>
-<pre><code class="lang-bash">$ aws cloudformation delete-stack --stack-name my-poll-app-api --region us-west-2
+<p>We&apos;re specifying the <code>-packaged</code> version of the template that we just generated, giving the stack a name (this will be used to prefix the generated names for all of our resources, so I would recommend using something you will recognize, like <em>yourinitials-poll-app-api</em>, as we&apos;ll need to find resources in the console).</p>
+<p>You should get some output that confirms a successful deployment.</p>
+<p><em>Note: if there is a problem with the stack creation and you need to fix something, you can remove the failed stack, which will be stuck in a <code>ROLLBACK_COMPLETE</code> state and thus won&apos;t let you redeploy the same stack, with the following:</em></p>
+<pre class="language-"><code class="lang-bash">$ aws cloudformation delete-stack --stack-name my-poll-app-api --region us-west-2
 </code></pre>
+<h2 id="manually-configure-cors">Manually configure CORS</h2>
+<p>Unfortunately there is currently not a trivial way to enable CORS on an <a href="../GLOSSARY.html#api-gateway" class="glossary-term" title="AWS service that facilitates the creation and management of scalable and secure APIs">API Gateway</a> resource easily from <a href="../GLOSSARY.html#cloudformation" class="glossary-term" title="AWS&apos;s infrastructure-as-code service">CloudFormation</a>.  The only current method involves including and referencing a Swagger file in the <a href="../GLOSSARY.html#sam" class="glossary-term" title="Serverless Application Model
+see https://github.com/awslabs/serverless-application-model">SAM</a> template, which is a method of documenting a RESTful API in a way that a consumer application can parse and understand and opens the possibility for auto-generation of client abstractions for APIs (think WSDL for REST, if you&apos;re familiar with SOAP APIs).  While this is very cool, it is a fairly involved task even for a simple API such as what we&apos;ve made here, and is thus beyond the scope of this tutorial, so for now we&apos;ll do this configuration manually in the console (boo!).  Note that there is an open issue on the <a href="../GLOSSARY.html#sam" class="glossary-term" title="Serverless Application Model
+see https://github.com/awslabs/serverless-application-model">SAM</a> issue tracker and soon this should be as simple as adding a <code>cors:true</code> parameter to each <a href="../GLOSSARY.html#api-gateway" class="glossary-term" title="AWS service that facilitates the creation and management of scalable and secure APIs">API Gateway</a> resource that we&apos;d like to enable CORS on. </p>
+<p>Head to the <a href="../GLOSSARY.html#api-gateway" class="glossary-term" title="AWS service that facilitates the creation and management of scalable and secure APIs">API Gateway</a> console and select our API:
+     <a href="../images/api/deployment/configure_cors_1.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../images/api/deployment/configure_cors_1.png" alt="">
+     </a></p>
+<p>Select the <code>/polls</code> resource:
+     <a href="../images/api/deployment/configure_cors_2.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../images/api/deployment/configure_cors_2.png" alt="">
+     </a></p>
+<p>In the <code>Actions</code> menu, select <code>Enable CORS</code>:
+     <a href="../images/api/deployment/configure_cors_3.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../images/api/deployment/configure_cors_3.png" alt="">
+     </a></p>
+<p>Leave everything default and select <code>Enable CORS and replace existing CORS headers</code>:
+     <a href="../images/api/deployment/configure_cors_4.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../images/api/deployment/configure_cors_4.png" alt="">
+     </a></p>
+<p>You&apos;ll now see a page showing the status of the operation, including a few errors.  Here&apos;s where things get a little annoying.  We need to specify the status codes we want to enable CORS for, and then run the CORS wizard <strong><em>again</em></strong>.
+     <a href="../images/api/deployment/configure_cors_5.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../images/api/deployment/configure_cors_5.png" alt="">
+     </a></p>
+<p>Select the <code>get</code> method of the root resource:
+     <a href="../images/api/deployment/configure_cors_6.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../images/api/deployment/configure_cors_6.png" alt="">
+     </a></p>
+<p>Select the <code>Method Response</code> execution stage:
+     <a href="../images/api/deployment/configure_cors_7.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../images/api/deployment/configure_cors_7.png" alt="">
+     </a></p>
+<p>Select <code>Add Response</code>:
+     <a href="../images/api/deployment/configure_cors_8.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../images/api/deployment/configure_cors_8.png" alt="">
+     </a></p>
+<p>Enter <code>200</code> for the status code and click the checkmark button:
+     <a href="../images/api/deployment/configure_cors_9.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../images/api/deployment/configure_cors_9.png" alt="">
+     </a></p>
+<p><strong>REPEAT</strong> these steps for the <code>OPTIONS</code> and <code>POST</code> methods of the <code>/polls</code> resource, specifying the <code>200</code> response code.
+     <a href="../images/api/deployment/configure_cors_10.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../images/api/deployment/configure_cors_10.png" alt="">
+     </a></p>
+<p>Go back to the root <code>/polls</code> resource and run the <code>Enable CORS</code> wizard once again:
+     <a href="../images/api/deployment/configure_cors_3.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../images/api/deployment/configure_cors_3.png" alt="">
+     </a></p>
+<p>Repeat ALL of these steps for the <code>/{answerIndex}</code> resource:
+     <a href="../images/api/deployment/configure_cors_11.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../images/api/deployment/configure_cors_11.png" alt="">
+     </a></p>
+<p>Finally, select <code>Deploy API</code> from the Actions menu:
+     <a href="../images/api/deployment/configure_cors_12.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../images/api/deployment/configure_cors_12.png" alt="">
+     </a></p>
+<p>Choose the <code>Prod</code> stage and <code>Deploy</code>:</p>
+<h2 id="----
+-------
+-----">     <a href="../images/api/deployment/configure_cors_13.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../images/api/deployment/configure_cors_13.png" alt="">
+     </a></h2>
+<p>It&apos;s a bit silly how difficult this is to accomplish currently, but it does do the trick and you only ever have to do it once.  Also, as I mentioned earlier, this should be fixed hopefully very soon.  We now have a fully CORS-enabled API ready to consume with a client application, so let&apos;s get busy building it in the next section!</p>
 
                                 
                                 </section>
@@ -446,7 +623,7 @@ see https://github.com/awslabs/serverless-application-model">SAM</a> application
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Deployment","level":"1.3.7","depth":2,"next":{"title":"Part II - Client App","level":"1.4","depth":1,"path":"client/intro.md","ref":"client/intro.md","articles":[{"title":"Create S3 Static Site Bucket","level":"1.4.1","depth":2,"path":"s3_site_bucket_setup.md","ref":"s3_site_bucket_setup.md","articles":[]},{"title":"Angular Project Setup","level":"1.4.2","depth":2,"path":"client/setup.md","ref":"client/setup.md","articles":[]},{"title":"Deployment","level":"1.4.3","depth":2,"path":"client/deployment.md","ref":"client/deployment.md","articles":[]}]},"previous":{"title":"Vote Function","level":"1.3.6","depth":2,"path":"api/vote_function.md","ref":"api/vote_function.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"api/deployment.md","mtime":"2018-02-15T06:24:41.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-02-16T03:53:12.618Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Deployment","level":"1.3.7","depth":2,"next":{"title":"Part II - Client App","level":"1.4","depth":1,"path":"client/intro.md","ref":"client/intro.md","articles":[{"title":"Angular Project Setup","level":"1.4.1","depth":2,"path":"client/setup.md","ref":"client/setup.md","articles":[]},{"title":"Poll Service","level":"1.4.2","depth":2,"path":"client/poll_service.md","ref":"client/poll_service.md","articles":[]},{"title":"Polls Component","level":"1.4.3","depth":2,"path":"client/polls_component.md","ref":"client/polls_component.md","articles":[]},{"title":"Poll Component","level":"1.4.4","depth":2,"path":"client/poll_component.md","ref":"client/poll_component.md","articles":[]},{"title":"New Poll Form Component","level":"1.4.5","depth":2,"path":"client/new_poll_form_component.md","ref":"client/new_poll_form_component.md","articles":[]},{"title":"Deployment","level":"1.4.6","depth":2,"path":"client/deployment.md","ref":"client/deployment.md","articles":[]}]},"previous":{"title":"Vote Function","level":"1.3.6","depth":2,"path":"api/vote_function.md","ref":"api/vote_function.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","fancybox"],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"fancybox":{"helpers":{"buttons":{}}},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"api/deployment.md","mtime":"2018-02-21T07:55:45.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-02-21T10:01:34.105Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -454,6 +631,26 @@ see https://github.com/awslabs/serverless-application-model">SAM</a> application
         
     <script src="../gitbook/gitbook.js"></script>
     <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.mousewheel.pack.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.fancybox.pack.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.fancybox-buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/plugin.js"></script>
+        
     
         
         <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>

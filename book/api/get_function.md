@@ -39,14 +39,7 @@ export const handler: Handler = (event: APIGatewayEvent, context: Context, callb
     });
 }
 ```
-We've added a new type to the `ResponseType` enumeration, so head over to the `api-gateway-response.ts` file and add it:
-```typescript
-export enum ResponseType {
-    OK = 200,
-    SERVER_ERROR = 500,
-    NOT_FOUND = 404
-}
-```
+
 Add the resource to the `template.yml` file below our other function:
 ```yaml
 ...
@@ -56,7 +49,7 @@ GetPoll:
       CodeUri: ./dist/getpoll/getpoll.zip
       Handler: index.handler
       Runtime: nodejs6.10
-      Policies: AmazonDynamoDBFullAccess
+      Policies: AmazonDynamoDBReadOnlyAccess
       Events:
         CreatePoll:
           Type: Api
@@ -67,6 +60,7 @@ GetPoll:
         Variables:
           TABLE_NAME: !Ref Polls
 ```
+Note that we've used a different policy, `AmazonDynamoDBReadOnlyAccess`, since this function shouldn't ever need to write data.
 
 Generate our mock payload, referencing the id from the last section:
 ```bash
@@ -89,10 +83,10 @@ We need to make a small modification to the mock file, as the `generate-event` c
 ```
 Now we can test the new function. Don't forget to run `webpack` again first!
 ```bash
-$ AWS_REGION="us-west-2" TABLE_NAME="poll-testdb" sam local invoke GetPoll -e mocks/get-poll.json
+$ TABLE_NAME="poll-test" sam local invoke GetPoll -e mocks/get-poll.json
 ```
 You should see some output with a json representation of the poll we created earlier.
 
-===
+---
 
 Let's move on to the List function, which will return all of the polls in the database.
